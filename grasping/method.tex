@@ -1,6 +1,5 @@
 \section{Proposed Method}
 \subsection{\revadd{Instance Segmentation With MSAM-Net}}
-\noindent\reviewnote{\mbox{Reviewer 1, Q2}}\par
 \subsubsection{Network Design}
 To balance segmentation accuracy and computational efficiency, MSAM-Net uses YOLOv10 as the backbone and redesigns the segmentation head for baggage scenes. Baggage instances exhibit large scale variation, partial overlap, and fine boundary interference from tags and straps. MSAM-Net therefore contains two task-driven components: a four-level enhanced multi-branch feature pyramid network (4L-EMB-FPN) and an attention-guided multi-scale mask module (MSM). The architecture is shown in Fig.~\ref{fig:msam}.
 
@@ -126,9 +125,8 @@ $\tau_{\mathrm{\text{thin}}},\tau_{\mathrm{\text{prot}}},\tau_{\mathrm{norm}}$
 \end{algorithm}
 
 \subsection{\revadd{Spatio-Temporal Geometric Modeling}}
-\noindent\reviewnote{\mbox{Reviewer 1, Q2}}\par
 \subsubsection{PX3C Filtering}
-Even after applying \revadd{the 2D mask from the instance segmentation module} \reviewnote{\mbox{Reviewer 1, Q4}}, the projected point cloud often contains "ghost" points from unmasked ribbons or tag edges. To resolve this inconsistency between 2D segmentation and 3D geometry, we formulate the filtering process as a Conditional Geometric Self-Consistency problem. We employ standard preprocessing routines from the PCL, utilizing VoxelGrid downsampling for data regularization and RANSAC-based plane segmentation to isolate the rigid baggage body, and apply Principal Component Analysis (PCA) to construct the initial OBB $\mathcal{O}_{\text{cand}}$. \revadd{However, flexible attachments} \reviewnote{\mbox{Reviewer 1, Q4}; \mbox{Reviewer 2, Q5}} can still distort standard PCA, causing the OBB to misalign (e.g., the main axis following a drifting ribbon). This creates a circular dependency: accurate filtering requires a reliable model, but the model itself depends on filtered data. We address this via a self-bootstrapped conditional refinement (Algorithm~\ref{alg:px3c}), alternating between provisional model estimation and geometry-aware filtering.
+Even after applying \revadd{the 2D mask from the instance segmentation module}, the projected point cloud often contains "ghost" points from unmasked ribbons or tag edges. To resolve this inconsistency between 2D segmentation and 3D geometry, we formulate the filtering process as a Conditional Geometric Self-Consistency problem. We employ standard preprocessing routines from the PCL, utilizing VoxelGrid downsampling for data regularization and RANSAC-based plane segmentation to isolate the rigid baggage body, and apply Principal Component Analysis (PCA) to construct the initial OBB $\mathcal{O}_{\text{cand}}$. \revadd{However, flexible attachments} can still distort standard PCA, causing the OBB to misalign (e.g., the main axis following a drifting ribbon). This creates a circular dependency: accurate filtering requires a reliable model, but the model itself depends on filtered data. We address this via a self-bootstrapped conditional refinement (Algorithm~\ref{alg:px3c}), alternating between provisional model estimation and geometry-aware filtering.
 
 \begin{algorithm}[t]
 \caption{Consistency-Aware OBB Stabilization (CAOS)}
@@ -256,7 +254,7 @@ k(1-q)
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig3_rev.pdf}
-\caption{System Workflow of the \revadd{Dynamic Grasping Strategy.} \reviewnote{\mbox{Reviewer 1, Q4}; \mbox{Reviewer 2, Q4}}}
+\caption{System Workflow of the \revadd{Dynamic Grasping Strategy.}}
 \label{fig:planning}
 \end{figure}
 
@@ -302,7 +300,7 @@ and the output OBB state is updated by:
 \end{cases}
 \label{eq:caos}
 \end{equation}
-where $\boldsymbol{b}^{*}$ is the last reliable snapshot, $\boldsymbol{b}_{t}^{\text{raw}}$ is the current PX3C observation, $\oplus(\boldsymbol{v}\Delta t)$ denotes conveyor-motion compensation over duration $\Delta t$, and $\beta(q)=\min(\beta_{\text{\text{max}}},k(1-q))$ is an adaptive smoothing coefficient. \revadd{$q_{\text{cov}}$, $q_{\text{in}}$, and $q_{\text{stab}}$ denote coverage, inlier rate, and temporal stability, respectively, and $q$ is their weighted quality score.} \reviewnote{\mbox{Reviewer 1, Q8}} A lower quality score increases the reliance on historical prediction, thereby preventing abrupt and unreliable control commands.
+where $\boldsymbol{b}^{*}$ is the last reliable snapshot, $\boldsymbol{b}_{t}^{\text{raw}}$ is the current PX3C observation, $\oplus(\boldsymbol{v}\Delta t)$ denotes conveyor-motion compensation over duration $\Delta t$, and $\beta(q)=\min(\beta_{\text{\text{max}}},k(1-q))$ is an adaptive smoothing coefficient. \revadd{$q_{\text{cov}}$, $q_{\text{in}}$, and $q_{\text{stab}}$ denote coverage, inlier rate, and temporal stability, respectively, and $q$ is their weighted quality score.} A lower quality score increases the reliance on historical prediction, thereby preventing abrupt and unreliable control commands.
 
 \begin{figure}[!t]
 \centering
@@ -312,7 +310,6 @@ where $\boldsymbol{b}^{*}$ is the last reliable snapshot, $\boldsymbol{b}_{t}^{\
 \end{figure}
 
 \subsection{\revadd{Dynamic Grasping and Active State Regulation}}
-\noindent\reviewnote{\mbox{Reviewer 1, Q2}}\par
 We adopt a "Predict-Follow-Grasp" execution paradigm, as illustrated in Fig. \ref{fig:planning}. The process involves visual perception and modeling in the Recognition Zone, followed by velocity synchronization in the Following Zone, and finally, grasping execution in the Execution Zone.
 \subsubsection{Recursive Bayesian State Estimation}
 The dynamic state of the baggage centroid is estimated using a discrete Kalman filter with a constant-acceleration model. The state vector is
@@ -327,7 +324,7 @@ The process and observation models are
 \end{cases}
 \label{eq:state}
 \end{equation}
-where $\boldsymbol{z}_{k}$ is the observed centroid, $\boldsymbol{w}_{k-1}\sim\mathcal{N}(0,\boldsymbol{Q})$ is the process noise, and $\boldsymbol{v}_{k}\sim\mathcal{N}(0,\boldsymbol{R})$ is the measurement noise. \revadd{$\boldsymbol{H}$ is the observation matrix that extracts the position components from the state vector.} \reviewnote{\mbox{Reviewer 1, Q8}} The transition matrix is block diagonal:
+where $\boldsymbol{z}_{k}$ is the observed centroid, $\boldsymbol{w}_{k-1}\sim\mathcal{N}(0,\boldsymbol{Q})$ is the process noise, and $\boldsymbol{v}_{k}\sim\mathcal{N}(0,\boldsymbol{R})$ is the measurement noise. \revadd{$\boldsymbol{H}$ is the observation matrix that extracts the position components from the state vector.} The transition matrix is block diagonal:
 \begin{equation}
 \boldsymbol{F}=\mathrm{diag}(\boldsymbol{F}_{x},\boldsymbol{F}_{y},\boldsymbol{F}_{z}),
 \end{equation}
@@ -340,15 +337,14 @@ with
 \end{bmatrix}.
 \label{eq:fx}
 \end{equation}
-\noindent\reviewnote{\mbox{Reviewer 1, Q8}}\par
 
-The filter operates in a \textit{Predict-Update} cycle. \revadd{The prior and posterior state estimates are $\hat{\boldsymbol{x}}_k^{-}$ and $\hat{\boldsymbol{x}}_k$, with error covariances $\boldsymbol{P}_k^{-}$ and $\boldsymbol{P}_k$, respectively.} \reviewnote{\mbox{Reviewer 1, Q8}} In the \textit{Predict} phase, we extrapolate the prior state $\hat{\boldsymbol{x}}_{k}^{-}$ and the error covariance $\boldsymbol{P}_{k}^{-}$ based on the optimal estimation \revadd{$\hat{\boldsymbol{x}}_{k-1}$} from the previous step: \reviewnote{\mbox{Reviewer 1, Q8}}
+The filter operates in a \textit{Predict-Update} cycle. \revadd{The prior and posterior state estimates are $\hat{\boldsymbol{x}}_k^{-}$ and $\hat{\boldsymbol{x}}_k$, with error covariances $\boldsymbol{P}_k^{-}$ and $\boldsymbol{P}_k$, respectively.} In the \textit{Predict} phase, we extrapolate the prior state $\hat{\boldsymbol{x}}_{k}^{-}$ and the error covariance $\boldsymbol{P}_{k}^{-}$ based on the optimal estimation \revadd{$\hat{\boldsymbol{x}}_{k-1}$} from the previous step:
 \begin{equation}
 \hat{\boldsymbol{x}}_{k}^{-}=\boldsymbol{F}\hat{\boldsymbol{x}}_{k-1},\
 \boldsymbol{P}_{k}^{-}=\boldsymbol{F}\boldsymbol{P}_{k-1}\boldsymbol{F}^{T}+\boldsymbol{Q},
 \label{eq:kf_predict}
 \end{equation}
-and in the \textit{Update} phase, the Kalman Gain $\boldsymbol{K}_{k}$ is computed using the current observation $\boldsymbol{z}_k$ to correct the prior error, yielding \revadd{the posterior estimate $\hat{\boldsymbol{x}}_k$} \reviewnote{\mbox{Reviewer 1, Q8}} and the updated posterior error covariance $\boldsymbol{P}_{k}$ as:
+and in the \textit{Update} phase, the Kalman Gain $\boldsymbol{K}_{k}$ is computed using the current observation $\boldsymbol{z}_k$ to correct the prior error, yielding \revadd{the posterior estimate $\hat{\boldsymbol{x}}_k$} and the updated posterior error covariance $\boldsymbol{P}_{k}$ as:
 \begin{equation}
 \begin{cases}
     \boldsymbol{K}_{k}=\boldsymbol{P}_{k}^{-}\boldsymbol{H}^{T}(\boldsymbol{H}\boldsymbol{P}_{k}^{-}\boldsymbol{H}^{T}+\boldsymbol{R})^{-1}, \\
@@ -370,8 +366,7 @@ The grasping planner contains two stages, as shown in Algorithm~\ref{algo:two_st
 \|\boldsymbol{p}(t_f)-\boldsymbol{p}_{\text{start}}\|-\revaddmath{\bar v}(t_f-t_{\text{start}})=0,
 \label{eq:interception}
 \end{equation}
-\noindent\reviewnote{\mbox{Reviewer 1, Q8}}\par
-where \revadd{$\bar v$} \reviewnote{\mbox{Reviewer 1, Q8}} is the average feasible robot velocity. \eqref{eq:interception} is solved iteratively using Newton--Raphson updates. To compensate for neglected acceleration and jerk constraints, a buffer term is added:
+where \revadd{$\bar v$} is the average feasible robot velocity. \eqref{eq:interception} is solved iteratively using Newton--Raphson updates. To compensate for neglected acceleration and jerk constraints, a buffer term is added:
 \begin{equation}
 t_f'=t_f+\Delta t_{\text{buffer}},\quad
 \Delta t_{\text{buffer}}=\alpha\frac{v_{\text{\text{max}}}}{a_{\text{\text{max}}}}, \label{equ:estimate}
@@ -384,7 +379,7 @@ E_{\text{sync}}(t)=\frac{\|\boldsymbol{v}_{\text{EE}}(t)-\boldsymbol{v}_{\text{g
 \lambda\frac{\|\boldsymbol{p}_{\text{EE}}^{xy}(t)-\boldsymbol{p}_{\text{grasp}}^{xy}(t)\|^2}{d_{\text{ref}}^{2}}.
 \label{eq:sync}
 \end{equation}
-The first term measures velocity synchronization, and the second term measures planar position alignment. When $E_{\text{sync}}<\epsilon_{\text{safe}}$, the end-effector and target are treated as relatively static, and the robot performs the final short vertical descent. Because the descent distance is only \revadd{80~$\mathrm{mm}$}, the residual relative velocity is negligible during this interval. \reviewnote{\mbox{Reviewer 2, Q5}} The final motion is therefore planned as a local point-to-point trajectory using a quintic polynomial.
+The first term measures velocity synchronization, and the second term measures planar position alignment. When $E_{\text{sync}}<\epsilon_{\text{safe}}$, the end-effector and target are treated as relatively static, and the robot performs the final short vertical descent. Because the descent distance is only \revadd{80~$\mathrm{mm}$}, the residual relative velocity is negligible during this interval. The final motion is therefore planned as a local point-to-point trajectory using a quintic polynomial.
 
 \begin{algorithm}[t]
 \caption{Two-Stage Dynamic Grasping Planning Strategy}
@@ -393,7 +388,7 @@ The first term measures velocity synchronization, and the second term measures p
 
 \Require Target state estimate
  \revadd{posterior state $\hat{\boldsymbol{x}}_k$ (position, velocity, and acceleration);
-interception settings $\Delta h,\bar v$; robot kinematic limits $v_{\text{max}},a_{\text{max}}$;} \reviewnote{\mbox{Reviewer 1, Q6}; \mbox{Reviewer 1, Q8}; \mbox{Reviewer 2, Q1}}
+interception settings $\Delta h,\bar v$; robot kinematic limits $v_{\text{max}},a_{\text{max}}$;}
 thresholds $\epsilon_{\text{safe}},\lambda,v_{\text{ref}},d_{\text{ref}}$
 
 \Ensure Robot position command vector $\mathbf{q}_{\text{cmd}}$
@@ -416,7 +411,7 @@ $P_{\text{in}}=\mathbf{p}_{\text{obj}}+[0,0,\Delta h]^{T}$
     \right\|
     -
     \revaddmath{\bar v}\cdot t$
-    \Statex \reviewnote{\mbox{Reviewer 1, Q8}}
+    \Statex
 
 \Until{convergence}
 
@@ -465,4 +460,4 @@ $t_{\text{inter}}\gets t_f+\alpha\frac{v_{\text{max}}}{a_{\text{max}}}$
 \end{algorithm}
 
 \subsubsection{Active State Regulation}
-Passive visual servoing assumes that observation uncertainty will eventually decrease as additional frames are received. This assumption is not always valid in conveyor-belt baggage handling.  \revadd{Stacked or colliding objects may remain poorly observable or prevent synchronization. Such configurations can lead to high-entropy object states and increased control uncertainty.} \reviewnote{\mbox{Reviewer 1, Q6}; \mbox{Reviewer 2, Q1}; \mbox{Reviewer 3, Q5}}  \revadd{The proposed active state-regulation mechanism} \reviewnote{\mbox{Reviewer 1, Q2}} addresses this failure mode by allowing the robot to reshape the environment.  \revadd{When $\mathrm{tr}(\boldsymbol{P}_{p,k})>\tau_P$ or $E_{\text{sync}}$ does not converge, precision placement is temporarily aborted. Here, $\boldsymbol{P}_{p,k}$ is the covariance submatrix for $[p_x,p_y,p_z]^T$. We set $\tau_P=4.0\times10^{-4}~\mathrm{m}^2$, corresponding to a root-sum-of-variances positional uncertainty of 0.020~$\mathrm{m}$.} \reviewnote{\mbox{Reviewer 1, Q6}; \mbox{Reviewer 2, Q1}} The robot then performs a best-effort suction grasp based on the predicted centroid and relocates the baggage to an empty conveyor region detected by the vision system. This reset action converts a chaotic or poorly observable state into an ordered state for subsequent handling, thereby closing the loop between perception and manipulation. \revadd{After relocation, the system acquires new RGB-D observations, re-estimates the target state, and replans normal gripper-based grasping.} \reviewnote{\mbox{Reviewer 1, Q3}; \mbox{Reviewer 3, Q5}}
+Passive visual servoing assumes that observation uncertainty will eventually decrease as additional frames are received. This assumption is not always valid in conveyor-belt baggage handling.  \revadd{Stacked or colliding objects may remain poorly observable or prevent synchronization. Such configurations can lead to high-entropy object states and increased control uncertainty.}  \revadd{The proposed active state-regulation mechanism} addresses this failure mode by allowing the robot to reshape the environment.  \revadd{When $\mathrm{tr}(\boldsymbol{P}_{p,k})>\tau_P$ or $E_{\text{sync}}$ does not converge, precision placement is temporarily aborted. Here, $\boldsymbol{P}_{p,k}$ is the covariance submatrix for $[p_x,p_y,p_z]^T$. We set $\tau_P=4.0\times10^{-4}~\mathrm{m}^2$, corresponding to a root-sum-of-variances positional uncertainty of 0.020~$\mathrm{m}$.} The robot then performs a best-effort suction grasp based on the predicted centroid and relocates the baggage to an empty conveyor region detected by the vision system. This reset action converts a chaotic or poorly observable state into an ordered state for subsequent handling, thereby closing the loop between perception and manipulation. \revadd{After relocation, the system acquires new RGB-D observations, re-estimates the target state, and replans normal gripper-based grasping.}
