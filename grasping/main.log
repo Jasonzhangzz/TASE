@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2025.5.23)  17 OCT 2026 13:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2025.5.23)  17 OCT 2026 14:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -466,13 +466,12 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 ]) (./related.tex [2]) (./problem.tex [3]
 
-pdfTeX warning: pdflatex (file ./figures/fig1_reviewer_annotated.pdf): PDF incl
-usion: found PDF version <1.7>, but at most version <1.5> allowed
-<figures/fig1_reviewer_annotated.pdf, id=19, 2150.0325pt x 1814.78pt>
-File: figures/fig1_reviewer_annotated.pdf Graphic file (type pdf)
-<use figures/fig1_reviewer_annotated.pdf>
-Package pdftex.def Info: figures/fig1_reviewer_annotated.pdf  used on input lin
-e 7.
+pdfTeX warning: pdflatex (file ./figures/fig1_rev.pdf): PDF inclusion: found PD
+F version <1.7>, but at most version <1.5> allowed
+<figures/fig1_rev.pdf, id=19, 2150.0325pt x 1814.78pt>
+File: figures/fig1_rev.pdf Graphic file (type pdf)
+<use figures/fig1_rev.pdf>
+Package pdftex.def Info: figures/fig1_rev.pdf  used on input line 7.
 (pdftex.def)             Requested size: 516.0pt x 435.52841pt.
 ) (./method.tex
 
@@ -490,45 +489,39 @@ Underfull \hbox (badness 1728) in paragraph at lines 102--103
 
 [4]
 
-pdfTeX warning: pdflatex (file ./figures/fig3.pdf): PDF inclusion: found PDF ve
-rsion <1.7>, but at most version <1.5> allowed
-<figures/fig3.pdf, id=30, 2257.43375pt x 1296.845pt>
-File: figures/fig3.pdf Graphic file (type pdf)
-<use figures/fig3.pdf>
-Package pdftex.def Info: figures/fig3.pdf  used on input line 258.
-(pdftex.def)             Requested size: 252.0pt x 144.75095pt.
+pdfTeX warning: pdflatex (file ./figures/fig3_rev.pdf): PDF inclusion: found PD
+F version <1.7>, but at most version <1.5> allowed
+<figures/fig3_rev.pdf, id=30, 2343.75626pt x 778.91pt>
+File: figures/fig3_rev.pdf Graphic file (type pdf)
+<use figures/fig3_rev.pdf>
+Package pdftex.def Info: figures/fig3_rev.pdf  used on input line 258.
+(pdftex.def)             Requested size: 252.0pt x 83.74307pt.
 
 Underfull \vbox (badness 1990) has occurred while \output is active []
 
- [5 <./figures/fig1_reviewer_annotated.pdf>]
-Underfull \vbox (badness 1173) has occurred while \output is active []
+ [5 <./figures/fig1_rev.pdf>] [6 <./figures/fig2.pdf> <./figures/fig3_rev.pdf>]
 
- [6 <./figures/fig2.pdf> <./figures/fig3.pdf>]
 
 pdfTeX warning: pdflatex (file ./figures/fig4.pdf): PDF inclusion: found PDF ve
 rsion <1.7>, but at most version <1.5> allowed
-<figures/fig4.pdf, id=145, 2023.56pt x 516.93124pt>
+<figures/fig4.pdf, id=144, 2023.56pt x 516.93124pt>
 File: figures/fig4.pdf Graphic file (type pdf)
 <use figures/fig4.pdf>
 Package pdftex.def Info: figures/fig4.pdf  used on input line 309.
 (pdftex.def)             Requested size: 252.0pt x 64.37172pt.
+[7 <./figures/fig4.pdf>]) (./experiment.tex
+Underfull \vbox (badness 2111) has occurred while \output is active []
 
-Underfull \vbox (badness 2005) has occurred while \output is active []
+ [8]
+Underfull \hbox (badness 1377) in paragraph at lines 3--4
+\OT1/ptm/m/n/10 lab-o-ra-tive robotic arm equipped with a hy-brid suction--
+ []
 
- [7 <./figures/fig4.pdf>]
 
-pdfTeX warning: pdflatex (file ./figures/fig5.pdf): PDF inclusion: found PDF ve
-rsion <1.7>, but at most version <1.5> allowed
-<figures/fig5.pdf, id=184, 2197.20876pt x 1647.15375pt>
-File: figures/fig5.pdf Graphic file (type pdf)
-<use figures/fig5.pdf>
-Package pdftex.def Info: figures/fig5.pdf  used on input line 383.
-(pdftex.def)             Requested size: 252.0pt x 188.90346pt.
-) (./experiment.tex [8 <./figures/fig5.pdf>]
 
 pdfTeX warning: pdflatex (file ./figures/fig6.pdf): PDF inclusion: found PDF ve
 rsion <1.7>, but at most version <1.5> allowed
-<figures/fig6.pdf, id=193, 1828.8325pt x 1556.81625pt>
+<figures/fig6.pdf, id=188, 1828.8325pt x 1556.81625pt>
 File: figures/fig6.pdf Graphic file (type pdf)
 <use figures/fig6.pdf>
 Package pdftex.def Info: figures/fig6.pdf  used on input line 7.
@@ -538,47 +531,43 @@ Underfull \hbox (badness 4886) in paragraph at lines 14--15
 []\OT1/ptm/m/n/10 For 2D seg-men-ta-tion eval-u-a-tion, Seg-Data com-prises
  []
 
+[9 <./figures/fig6.pdf>]
 
-Underfull \vbox (badness 1502) has occurred while \output is active []
+pdfTeX warning: pdflatex (file ./figures/fig7_rev.pdf): PDF inclusion: found PD
+F version <1.7>, but at most version <1.5> allowed
+<figures/fig7_rev.pdf, id=203, 2191.18625pt x 756.8275pt>
+File: figures/fig7_rev.pdf Graphic file (type pdf)
+<use figures/fig7_rev.pdf>
+Package pdftex.def Info: figures/fig7_rev.pdf  used on input line 91.
+(pdftex.def)             Requested size: 252.0pt x 87.0391pt.
 
- [9 <./figures/fig6.pdf>]
-<figures/fig7.png, id=204, 1003.75pt x 602.25pt>
-File: figures/fig7.png Graphic file (type png)
-<use figures/fig7.png>
-Package pdftex.def Info: figures/fig7.png  used on input line 91.
-(pdftex.def)             Requested size: 252.0pt x 151.1962pt.
-<figures/fig8.png, id=205, 1003.75pt x 803.0pt>
-File: figures/fig8.png Graphic file (type png)
-<use figures/fig8.png>
-Package pdftex.def Info: figures/fig8.png  used on input line 101.
-(pdftex.def)             Requested size: 252.0pt x 201.59494pt.
- [10 <./figures/fig7.png> <./figures/fig8.png>]
 
-pdfTeX warning: pdflatex (file ./figures/fig7.pdf): PDF inclusion: found PDF ve
-rsion <1.7>, but at most version <1.5> allowed
-<figures/fig7.pdf, id=215, 2157.05875pt x 1656.1875pt>
-File: figures/fig7.pdf Graphic file (type pdf)
-<use figures/fig7.pdf>
-Package pdftex.def Info: figures/fig7.pdf  used on input line 112.
-(pdftex.def)             Requested size: 516.0pt x 396.17902pt.
-<figures/fig10.png, id=216, 414.567pt x 160.308pt>
+pdfTeX warning: pdflatex (file ./figures/fig9_rev.pdf): PDF inclusion: found PD
+F version <1.7>, but at most version <1.5> allowed
+<figures/fig9_rev.pdf, id=204, 2157.05875pt x 1485.55pt>
+File: figures/fig9_rev.pdf Graphic file (type pdf)
+<use figures/fig9_rev.pdf>
+Package pdftex.def Info: figures/fig9_rev.pdf  used on input line 105.
+(pdftex.def)             Requested size: 516.0pt x 355.36057pt.
+<figures/fig10.png, id=205, 414.567pt x 160.308pt>
 File: figures/fig10.png Graphic file (type png)
 <use figures/fig10.png>
-Package pdftex.def Info: figures/fig10.png  used on input line 121.
+Package pdftex.def Info: figures/fig10.png  used on input line 114.
 (pdftex.def)             Requested size: 252.0pt x 97.44527pt.
 
-Underfull \vbox (badness 3229) has occurred while \output is active []
-
- [11 <./figures/fig7.pdf> <./figures/fig10.png>]
 
 pdfTeX warning: pdflatex (file ./figures/fig8.pdf): PDF inclusion: found PDF ve
 rsion <1.7>, but at most version <1.5> allowed
-<figures/fig8.pdf, id=248, 1872.9975pt x 576.1525pt>
+<figures/fig8.pdf, id=207, 1872.9975pt x 576.1525pt>
 File: figures/fig8.pdf Graphic file (type pdf)
 <use figures/fig8.pdf>
-Package pdftex.def Info: figures/fig8.pdf  used on input line 135.
+Package pdftex.def Info: figures/fig8.pdf  used on input line 128.
 (pdftex.def)             Requested size: 516.0pt x 158.72813pt.
-) (./conclusion.tex
+[10 <./figures/fig7_rev.pdf>]
+
+LaTeX Warning: Text page 11 contains only floats.
+
+) (./conclusion.tex [11 <./figures/fig9_rev.pdf> <./figures/fig10.png>]
 Underfull \hbox (badness 1635) in paragraph at lines 4--5
 \OT1/ptm/m/n/10 value of re-li-able ge-o-met-ric mod-el-ing and mo-tion plan-
  []
@@ -595,43 +584,45 @@ Underfull \hbox (badness 10000) in paragraph at lines 219--222
 /8 arXiv preprint
  []
 
-) [13] (./main.aux) ) 
+) [13
+
+] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 6066 strings out of 481239
- 91089 string characters out of 5920377
- 348790 words of memory out of 5000000
- 21184 multiletter control sequences out of 15000+600000
+ 6054 strings out of 481239
+ 90837 string characters out of 5920377
+ 348770 words of memory out of 5000000
+ 21172 multiletter control sequences out of 15000+600000
  575777 words of font info for 110 fonts, out of 8000000 for 9000
  1145 hyphenation exceptions out of 8191
- 41i,14n,42p,1995b,340s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc
-}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
-s/cmextra/cmmib7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cmextra/cmmib8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/
-utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (13 pages, 9008453 bytes).
+ 41i,14n,42p,1995b,378s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cme
+xtra/cmmib7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmex
+tra/cmmib8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+r10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8
+a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (13 pages, 8821925 bytes).
 PDF statistics:
- 354 PDF objects out of 1000 (max. 8388607)
- 172 compressed objects within 2 object streams
+ 352 PDF objects out of 1000 (max. 8388607)
+ 170 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 56 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 46 words of extra memory for PDF output out of 10000 (max. 10000000)
 

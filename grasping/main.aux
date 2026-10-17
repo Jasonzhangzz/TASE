@@ -69,14 +69,14 @@
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-B}2}CAOS Temporal Stabilization}{6}\protected@file@percent }
 \newlabel{eq:qcov}{{8}{6}}
 \newlabel{eq:qstab}{{9}{6}}
+\newlabel{eq:caos}{{11}{6}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Pixel-to-3D Cross Consistency Conditional Filtering (PX3C)}}{7}\protected@file@percent }
 \newlabel{alg:px3c}{{1}{7}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Schematic Diagram of the Interception Point $P_{\text  {\text  {in}}}$ and Rapid Interception Strategy.}}{7}\protected@file@percent }
 \newlabel{fig:rapid_interception}{{4}{7}}
-\newlabel{eq:caos}{{11}{7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-C}}\revadd  {Dynamic Grasping and Active State Regulation}}{7}\protected@file@percent }
 \@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Consistency-Aware OBB Stabilization (CAOS)}}{7}\protected@file@percent }
 \newlabel{alg:caos}{{2}{7}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-C}}\revadd  {Dynamic Grasping and Active State Regulation}}{7}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-C}1}Recursive Bayesian State Estimation}{7}\protected@file@percent }
 \newlabel{eq:state}{{13}{7}}
 \newlabel{eq:fx}{{15}{7}}
@@ -85,38 +85,32 @@
 \newlabel{eq:interception}{{19}{8}}
 \newlabel{equ:estimate}{{20}{8}}
 \newlabel{eq:sync}{{21}{8}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Robotic baggage-handling platform.}}{8}\protected@file@percent }
-\newlabel{fig:setup}{{5}{8}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Two-Stage Dynamic Grasping Planning Strategy}}{8}\protected@file@percent }
+\newlabel{algo:two_stage_dynamic_grasping}{{3}{8}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-C}3}Active State Regulation}{8}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {V}Experiments and Results}{8}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-A}}Experimental Setup}{8}\protected@file@percent }
-\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Two-Stage Dynamic Grasping Planning Strategy}}{9}\protected@file@percent }
-\newlabel{algo:two_stage_dynamic_grasping}{{3}{9}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Mask mAP versus inference time for different segmentation models.}}{9}\protected@file@percent }
-\newlabel{fig:comparison_time}{{6}{9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Mask mAP versus inference time for different segmentation models.}}{9}\protected@file@percent }
+\newlabel{fig:comparison_time}{{5}{9}}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Experiments and Results}{9}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-A}}Experimental Setup}{9}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces \revadd  {Core parameters of Geometric Modeling, Motion Planning, and Active State Regulation.} \reviewnote  {\mbox  {Reviewer 1, Q6}; \mbox  {Reviewer 2, Q1}}}}{9}\protected@file@percent }
+\newlabel{tab:geometry_parameters}{{I}{9}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-B}}Segmentation Performance}{9}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces \revadd  {Core parameters of Geometric Modeling, Motion Planning, and Active State Regulation.} \reviewnote  {\mbox  {Reviewer 1, Q6}; \mbox  {Reviewer 2, Q1}}}}{10}\protected@file@percent }
-\newlabel{tab:geometry_parameters}{{I}{10}}
 \@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Segmentation performance on SegData-test.}}{10}\protected@file@percent }
 \newlabel{tab:seg}{{II}{10}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-C}}3D Modeling Accuracy}{10}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Inference time comparison on AX650N.}}{10}\protected@file@percent }
 \newlabel{tab:latency}{{III}{10}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Comparison of dimension estimation errors before and after PX3C and CAOS. Error bars indicate 95\% confidence intervals.}}{10}\protected@file@percent }
-\newlabel{fig:estimation}{{7}{10}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Localization and yaw error distributions for different modeling stages. Ellipses represent 95\% confidence regions.}}{10}\protected@file@percent }
-\newlabel{fig:disturbance}{{8}{10}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Qualitative OBB comparison before and after PX3C filtering.}}{11}\protected@file@percent }
-\newlabel{fig:represent}{{9}{11}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-D}}System-Level Grasping Performance}{11}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces OBB predictions across consecutive frames with CAOS stabilization.}}{11}\protected@file@percent }
-\newlabel{fig:temporal}{{10}{11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Comparison of pose and dimension estimation errors before and after PX3C and CAOS. Left: localization and yaw error distributions, with ellipses denoting 95\% confidence regions. Right: dimension estimation errors, with error bars indicating 95\% confidence intervals.}}{10}\protected@file@percent }
+\newlabel{fig:estimation}{{6}{10}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-C}}3D Modeling Accuracy}{10}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-D}}System-Level Grasping Performance}{10}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Qualitative OBB comparison before and after PX3C filtering.}}{11}\protected@file@percent }
+\newlabel{fig:represent}{{7}{11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces OBB predictions across consecutive frames with CAOS stabilization.}}{11}\protected@file@percent }
+\newlabel{fig:temporal}{{8}{11}}
+\@writefile{lot}{\contentsline {table}{\numberline {IV}{\ignorespaces  \revadd  {Ablation study with 500 trials per configuration.} \reviewnote  {\mbox  {Reviewer 1, Q5}; \mbox  {Reviewer 2, Q3}}}}{11}\protected@file@percent }
+\newlabel{tab:ablation}{{IV}{11}}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion and Future Work}{11}\protected@file@percent }
 \bibdata{reference}
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Snapshots of the dynamic grasping experiment. The proposed framework achieves robust dynamic grasping on a real conveyor belt in an industrial environment, overcoming the challenges of high-speed motion, cluttered scenes, and control uncertainty.}}{12}\protected@file@percent }
-\newlabel{fig:snapshot}{{11}{12}}
-\@writefile{lot}{\contentsline {table}{\numberline {IV}{\ignorespaces  \revadd  {Ablation study with 500 trials per configuration.} \reviewnote  {\mbox  {Reviewer 1, Q5}; \mbox  {Reviewer 2, Q3}}}}{12}\protected@file@percent }
-\newlabel{tab:ablation}{{IV}{12}}
-\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion and Future Work}{12}\protected@file@percent }
 \bibcite{hutchinson2002tutorial}{1}
 \bibcite{he2017mask}{2}
 \bibcite{rusu20113d}{3}
@@ -143,6 +137,9 @@
 \bibcite{yu2018ec}{24}
 \bibcite{hu2025dynamic}{25}
 \bibcite{hu2021dynamic}{26}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Snapshots of the dynamic grasping experiment. The proposed framework achieves robust dynamic grasping on a real conveyor belt in an industrial environment, overcoming the challenges of high-speed motion, cluttered scenes, and control uncertainty.}}{12}\protected@file@percent }
+\newlabel{fig:snapshot}{{9}{12}}
+\@writefile{toc}{\contentsline {section}{References}{12}\protected@file@percent }
 \bibcite{alahi2016social}{27}
 \bibcite{li2003survey}{28}
 \bibcite{cowley2013perception}{29}
@@ -159,4 +156,3 @@
 \bibcite{kim2024openvla}{40}
 \bibcite{black2025realtime}{41}
 \bibstyle{IEEEtran}
-\@writefile{toc}{\contentsline {section}{References}{13}\protected@file@percent }

@@ -1,6 +1,6 @@
 \section{Experiments and Results}
 \subsection{Experimental Setup}
-The proposed framework was deployed on a real robotic baggage-handling platform, shown in Fig.~\ref{fig:setup}. The platform consists of a collaborative robotic arm equipped with a hybrid suction--gripper end-effector, a conveyor belt operating at \revadd{493.2~mm/s} \reviewnote{\mbox{Reviewer 1, Q6}; \mbox{Reviewer 2, Q1}}, and an Orbbec Gemini 435Le RGB-D camera with a resolution of $640\times400$ at 20~FPS. All algorithms were executed on an embedded AX650N processor. MSAM-Net inference, PX3C filtering, and CAOS stabilization were executed at every frame. \revadd{DKF state updates were executed at 5~Hz ($\Delta T=0.20~\mathrm{s}$), corresponding to a conveyor displacement of approximately 98.6~mm between updates.} \reviewnote{\mbox{Reviewer 1, Q6}; \mbox{Reviewer 2, Q1}}
+The proposed framework was deployed on a real robotic baggage-handling platform. The platform consists of a collaborative robotic arm equipped with a hybrid suction--gripper end-effector, a conveyor belt operating at \revadd{493.2~mm/s} \reviewnote{\mbox{Reviewer 1, Q6}; \mbox{Reviewer 2, Q1}}, and an Orbbec Gemini 435Le RGB-D camera with a resolution of $640\times400$ at 20~FPS. All algorithms were executed on an embedded AX650N processor. MSAM-Net inference, PX3C filtering, and CAOS stabilization were executed at every frame. \revadd{DKF state updates were executed at 5~Hz ($\Delta T=0.20~\mathrm{s}$), corresponding to a conveyor displacement of approximately 98.6~mm between updates.} \reviewnote{\mbox{Reviewer 1, Q6}; \mbox{Reviewer 2, Q1}}
 
 \begin{figure}[!t]
 \centering
@@ -88,28 +88,21 @@ SAM-ViT-B & 733.6 \\
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=\columnwidth]{figures/fig7.png}
-\caption{Comparison of dimension estimation errors before and after PX3C and CAOS. Error bars indicate 95\% confidence intervals.}
+\includegraphics[width=\columnwidth]{figures/fig7_rev.pdf}
+\caption{Comparison of pose and dimension estimation errors before and after PX3C and CAOS. Left: localization and yaw error distributions, with ellipses denoting 95\% confidence regions. Right: dimension estimation errors, with error bars indicating 95\% confidence intervals.}
 \label{fig:estimation}
 \end{figure}
 
 \subsection{3D Modeling Accuracy}
-To evaluate PX3C and CAOS, dimension and pose estimation errors were computed on OBBData-test. Dimension error was defined as the absolute error in length, width, and height. Pose error included centroid localization error and yaw error in the X--Y plane. Fig.~\ref{fig:estimation} compares dimension estimation before and after PX3C and CAOS, with error bars indicating 95\% confidence intervals.
-
-\begin{figure}[!t]
-\centering
-\includegraphics[width=\columnwidth]{figures/fig8.png}
-\caption{Localization and yaw error distributions for different modeling stages. Ellipses represent 95\% confidence regions.}
-\label{fig:disturbance}
-\end{figure}
+To evaluate PX3C and CAOS, dimension and pose estimation errors were computed on OBBData-test. Dimension error was defined as the absolute error in length, width, and height. Pose error included centroid localization error and yaw error in the X--Y plane. Fig.~\ref{fig:estimation} compares pose and dimension estimation before and after PX3C and CAOS.
 
 Compared with segmentation-only modeling, PX3C reduces the width estimation error by 35.5\%. The combined PX3C+CAOS pipeline further stabilizes the estimates. The length estimation error decreases by approximately 13.8\%, and the height estimation error reaches its minimum value of \revadd{0.33~$\mathrm{cm}$} \reviewnote{\mbox{Reviewer 2, Q5}} when both modules are applied. The overall downward shift of the confidence intervals indicates consistent improvement.
 
-The pose-error distributions are shown in Fig.~\ref{fig:disturbance}. Each scatter point corresponds to one sample, and the ellipses denote 95\% confidence regions. Localization error decreases from \revadd{2.38~$\mathrm{cm}$} \reviewnote{\mbox{Reviewer 2, Q5}} using segmentation-only modeling to \revadd{1.36~$\mathrm{cm}$} \reviewnote{\mbox{Reviewer 2, Q5}} with PX3C and to \revadd{0.88~$\mathrm{cm}$} \reviewnote{\mbox{Reviewer 2, Q5}} with CAOS. Yaw error decreases from $1.38^{\circ}$ to $0.78^{\circ}$. These results confirm that PX3C suppresses geometric outliers and CAOS reduces temporal fluctuations.
+The pose-error distributions are shown in Fig.~\ref{fig:estimation}. Each scatter point corresponds to one sample, and the ellipses denote 95\% confidence regions. Localization error decreases from \revadd{2.38~$\mathrm{cm}$} \reviewnote{\mbox{Reviewer 2, Q5}} using segmentation-only modeling to \revadd{1.36~$\mathrm{cm}$} \reviewnote{\mbox{Reviewer 2, Q5}} with PX3C and to \revadd{0.88~$\mathrm{cm}$} \reviewnote{\mbox{Reviewer 2, Q5}} with CAOS. Yaw error decreases from $1.38^{\circ}$ to $0.78^{\circ}$. These results confirm that PX3C suppresses geometric outliers and CAOS reduces temporal fluctuations.
 
 \begin{figure*}[!t]
 \centering
-\includegraphics[width=\textwidth]{figures/fig7.pdf}
+\includegraphics[width=\textwidth]{figures/fig9_rev.pdf}
 \caption{Qualitative OBB comparison before and after PX3C filtering.}
 \label{fig:represent}
 \end{figure*}

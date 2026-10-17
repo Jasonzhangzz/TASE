@@ -4,7 +4,7 @@ The proposed system forms a closed-loop perception, geometric modeling and contr
 
 \begin{figure*}[!t]
 \centering
-\includegraphics[width=\textwidth]{figures/fig1_reviewer_annotated.pdf}
+\includegraphics[width=\textwidth]{figures/fig1_rev.pdf}
 \caption{Overall framework of the proposed closed-loop perception, geometric modeling, and control system. RGB-D frames are first processed through instance segmentation (MSAM-Net) for mask refinement. The resulting point clouds undergo geometric consistency filtering (PX3C) and temporal stabilization (CAOS) to produce a reliable 3D representation. State estimation uses a Kalman-filter-based spatiotemporal approach, followed by two-stage motion planning in relative velocity space. \revadd{Active state regulation relocates unstable targets to restore observability before re-estimation and grasp planning.} \reviewnote{\mbox{Reviewer 1, Q2}; \mbox{Reviewer 3, Q5}}}
 \label{fig:overview}
 \end{figure*}
