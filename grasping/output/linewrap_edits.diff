@@ -1,0 +1,139 @@
+--- a/grasping/conclusion.tex
++++ b/grasping/conclusion.tex
+@@ -3,6 +3,6 @@
+ 
+ Experiments on a real robotic platform demonstrate that the proposed framework significantly improves precision-oriented grasping. While the general grasp success rate remains consistently high, \revadd{the precision success rate among successfully grasped suitcases improves from 62.1\% to 92.7\%.} \revadd{This improvement highlights the value of reliable geometric modeling and motion planning for precise placement in downstream baggage loading.} Although this work does not explicitly optimize packing policies, it provides the geometric and execution reliability required by high-density loading systems.
+ 
+-\revadd{The current validation is limited to predominantly rigid baggage on a structured conveyor at a nearly fixed speed. Performance with deformable baggage, severe clutter, variable conveyor motion, and different airport layouts remains to be established.}
++\revadd{The current validation is limited to predominantly rigid baggage on a structured conveyor at a nearly fixed speed. Performance with deformable baggage, severe clutter, variable conveyor motion, and airport layouts remains to be established.}
+ 
+ \revadd{Future work will integrate tactile sensing to improve contact feedback and the handling of deformable baggage. We will also investigate packing planning that coordinates container layouts with grasping and placement to improve packing density in practical aircraft baggage loading.}
+--- a/grasping/experiment.tex
++++ b/grasping/experiment.tex
+@@ -66,7 +66,7 @@
+ \end{tabular}
+ \end{table}
+ 
+-The 4L-EMB-FPN improves mask mAP by 1.27\% compared with the YOLOv10L baseline, and the full MSAM-Net further increases the gain to 2.43\%. These results show that enhanced multi-scale aggregation and attention-guided mask refinement improve segmentation quality under tag and strap interference.
++The 4L-EMB-FPN improves mask mAP by 1.27\% compared with the YOLOv10L baseline, and the full MSAM-Net further increases the gain to 2.43\%. These results show that multi-scale aggregation and attention-guided mask refinement improve segmentation quality under tag and strap interference.
+ 
+ Inference latency on the AX650N processor is reported in Table~\ref{tab:latency}. MSAM-Net increases the inference time from \revadd{21.1~$\mathrm{ms}$} to \revadd{43.6~$\mathrm{ms}$}, but remains below the \revadd{50~$\mathrm{ms}$} real-time threshold required for 20~Hz conveyor-based manipulation. By comparison, SAM-ViT-B requires \revadd{733.6~$\mathrm{ms}$} per frame and is therefore unsuitable for embedded real-time deployment in this system \revadd{(as shown in Fig.~\ref{fig:comparison_time}).} SAM was evaluated without task-specific fine-tuning and achieved a mask mAP of 0.69. However, the comparison primarily demonstrates computational feasibility under industrial constraints.
+ 
+@@ -96,7 +96,7 @@
+ \subsection{3D Modeling Accuracy}
+ To evaluate PX3C and CAOS, dimension and pose estimation errors were computed on OBBData-test. Dimension error was defined as the absolute error in length, width, and height. Pose error included centroid localization error and yaw error in the X--Y plane. Fig.~\ref{fig:estimation} compares pose and dimension estimation before and after PX3C and CAOS.
+ 
+-Compared with segmentation-only modeling, PX3C reduces the width estimation error by 35.5\%. The combined PX3C+CAOS pipeline further stabilizes the estimates. The length estimation error decreases by approximately 13.8\%, and the height estimation error reaches its minimum value of \revadd{0.33~$\mathrm{cm}$} when both modules are applied. The overall downward shift of the confidence intervals indicates consistent improvement.
++Compared with segmentation-only modeling, PX3C reduces the width estimation error by 35.5\%. The combined PX3C+CAOS pipeline further stabilizes the estimates. The length estimation error decreases by approximately 13.8\%, and the height estimation error reaches its minimum value of \revadd{0.33~$\mathrm{cm}$} when both modules are applied. The downward shift of the confidence intervals indicates consistent improvement.
+ 
+ The pose-error distributions are shown in Fig.~\ref{fig:estimation}. Each scatter point corresponds to one sample, and the ellipses denote 95\% confidence regions. Localization error decreases from \revadd{2.38~$\mathrm{cm}$} using segmentation-only modeling to \revadd{1.36~$\mathrm{cm}$} with PX3C and to \revadd{0.88~$\mathrm{cm}$} with CAOS. Yaw error decreases from $1.38^{\circ}$ to $0.78^{\circ}$. These results confirm that PX3C suppresses geometric outliers and CAOS reduces temporal fluctuations.
+ 
+@@ -107,7 +107,7 @@
+ \label{fig:represent}
+ \end{figure*}
+ 
+-Representative qualitative OBB comparisons are shown in Fig.~\ref{fig:represent}. Red boxes denote OBBs derived directly from segmentation, while green boxes denote refined OBBs after PX3C filtering. Flexible tags and ribbons are removed effectively, while rigid components such as handles and wheels are preserved. Temporal stabilization results are shown in Fig.~\ref{fig:temporal}, where CAOS reduces abrupt OBB fluctuations across consecutive frames caused by lighting variation, occlusion, and motion blur.
++Qualitative OBB comparisons are shown in Fig.~\ref{fig:represent}. Red boxes denote OBBs derived directly from segmentation, while green boxes denote refined OBBs after PX3C filtering. Flexible tags and ribbons are removed effectively, while rigid components such as handles and wheels are preserved. Temporal stabilization results are shown in Fig.~\ref{fig:temporal}, where CAOS reduces abrupt OBB fluctuations across consecutive frames caused by lighting variation, occlusion, and motion blur.
+ 
+ \begin{figure}[!t]
+ \centering
+--- a/grasping/introduction.tex
++++ b/grasping/introduction.tex
+@@ -1,5 +1,5 @@
+ \section{Introduction}
+-\IEEEPARstart{R}{obotic} baggage handling is becoming an important component of intelligent airport logistics, where sorting, loading, and transfer operations must be performed reliably within strict time windows. Vision feedback is essential in such systems because it connects object perception with grasp planning and execution. Classical visual servoing establishes closed-loop control by mapping visual feature errors to robot motion commands \cite{hutchinson2002tutorial}. However, in practical baggage handling environments, the dominant bottleneck is often not the control law itself, but the reliability and geometric fidelity of the visual observations used by the controller. Baggage items are visually heterogeneous, frequently occluded, and often equipped with deformable tags, straps, wheels, and handles. These factors make the perception-to-action pipeline substantially more difficult than standard pick-and-place manipulation with regular objects.
++\IEEEPARstart{R}{obotic} baggage handling is becoming an important component of intelligent airport logistics, where sorting, loading, and transfer operations must be performed reliably within strict time windows. Vision feedback is essential in such systems because it connects object perception with grasp planning and execution. Classical visual servoing establishes closed-loop control by mapping visual feature errors to robot motion commands \cite{hutchinson2002tutorial}. However, in practical baggage handling environments, the dominant bottleneck is often not the control law itself, but the reliability and geometric fidelity of the visual observations used by the controller. Baggage items are visually heterogeneous, frequently occluded, and often equipped with deformable tags, straps, wheels, and handles. These factors make the perception-to-action pipeline more difficult than standard pick-and-place manipulation with regular objects.
+ 
+ Conventional robotic grasping pipelines usually detect the target in RGB images and then fuse depth information for 6D pose or 3D bounding-box estimation. Bounding-box-based detection is efficient but lacks the boundary-level accuracy required for precise manipulation, especially when objects are stacked, partially occluded, or densely arranged. Instance segmentation improves spatial localization by separating objects at the pixel level, but segmentation errors at the boundary may still be amplified after projection into the point cloud. In baggage scenarios, flexible tags and straps are particularly problematic: they may be segmented as part of the rigid body in the image, but they do not belong to the stable geometric structure needed for grasping and placement.
+ 
+--- a/grasping/main.tex
++++ b/grasping/main.tex
+@@ -55,7 +55,7 @@
+ \maketitle
+ 
+ \begin{abstract}
+-Robotic baggage handling in airport logistics requires not only reliable grasp execution but also accurate geometric alignment under high-throughput industrial constraints. Existing vision-based manipulation pipelines usually process perception, geometric modeling, and motion control as weakly coupled modules. As a result, their performance can degrade when baggage tags and straps introduce visual interference, when residual mask errors are amplified during 2D to 3D projection, or when conveyor motion causes temporally unstable observations. This paper presents a closed-loop perception--geometric modeling--control framework for dynamic robotic baggage handling. The proposed system improves 2D instance segmentation through multi-scale feature aggregation and attention-guided mask refinement, enhances 3D geometric reliability using pixel-to-3D cross-consistency filtering and temporal oriented bounding-box (OBB) stabilization, and performs predictive grasp execution through recursive state estimation, coarse-to-fine interception planning, and active state regulation. \revadd{By coupling instance segmentation and spatio-temporal geometric modeling for accurate baggage perception, motion planning for grasp trajectory generation, and hybrid suction--gripper operation for active state regulation under low-confidence conditions, the framework achieves robust dynamic grasping.} Experiments on a real robotic platform show that the general grasp success rate remains consistently high, increasing from 93.6\% to 96.4\%, while the precision success rate improves from 62.1\% to 92.7\%. These results indicate that the proposed framework primarily improves pose accuracy and placement reliability rather than merely increasing lift success, \revadd{supporting precision-oriented baggage handling for downstream loading.}
++Robotic baggage handling in airport logistics requires not only reliable grasp execution but also accurate geometric alignment under high-throughput industrial constraints. Existing vision-based manipulation pipelines usually process perception, geometric modeling, and motion control as weakly coupled modules. As a result, their performance can degrade when baggage tags and straps introduce visual interference, when residual mask errors are amplified during 2D to 3D projection, or when conveyor motion causes temporally unstable observations. This paper presents a closed-loop perception--geometric modeling--control framework for dynamic robotic baggage handling. The proposed system improves 2D instance segmentation through multi-scale feature aggregation and attention-guided mask refinement, enhances 3D geometric reliability using pixel-to-3D cross-consistency filtering and temporal oriented bounding-box (OBB) stabilization, and performs predictive grasp execution through recursive state estimation, coarse-to-fine interception planning, and active state regulation. \revadd{By coupling instance segmentation and spatio-temporal geometric modeling for accurate baggage perception, motion planning for grasp trajectory generation, and hybrid suction--gripper operation for active state regulation under low-confidence conditions, the framework achieves robust dynamic grasping.} Experiments on a real robotic platform show that the general grasp success rate remains high, increasing from 93.6\% to 96.4\%, while the precision success rate improves from 62.1\% to 92.7\%. These results indicate that the proposed framework primarily improves pose accuracy and placement reliability rather than merely increasing lift success, \revadd{supporting precision-oriented baggage handling for downstream loading.}
+ \end{abstract}
+ 
+ \renewcommand{\abstractname}{Note to Practitioners}
+--- a/grasping/method.tex
++++ b/grasping/method.tex
+@@ -264,7 +264,7 @@
+ \min_{p\in\mathcal{N}(i)}\langle\boldsymbol{p}-\bar{\boldsymbol{p}},\boldsymbol{n}\rangle}{L_{\min}},
+ \label{eq:fthin}
+ \end{equation}
+-where $\mathcal{N}(i)$ is the local neighborhood, $\bar{\boldsymbol{p}}$ is the neighborhood centroid, and $\boldsymbol{n}$ is the average normal. The protrusion feature measures the normalized distance outside the provisional OBB:
++where $\mathcal{N}(i)$ is the local neighborhood, $\bar{\boldsymbol{p}}$ is the neighborhood centroid, and $\boldsymbol{n}$ is the average normal. The protrusion feature measures the normalized distance outside the OBB:
+ \begin{equation}
+ f_{\text{\text{prot}}}=\max\{0,d_{\text{\text{out}}}(i)/\epsilon_{\text{\text{prot}}}\},
+ \label{eq:fprot}
+@@ -305,7 +305,7 @@
+ \begin{figure}[!t]
+ \centering
+ \includegraphics[width=\columnwidth]{figures/fig4.pdf}
+-\caption{Schematic Diagram of the Interception Point $P_{\text{\text{in}}}$ and Rapid Interception Strategy.}
++\caption{Diagram of the Interception Point $P_{\text{\text{in}}}$ and Rapid Interception Strategy.}
+ \label{fig:rapid_interception}
+ \end{figure}
+ 
+@@ -324,7 +324,7 @@
+ \end{cases}
+ \label{eq:state}
+ \end{equation}
+-where $\boldsymbol{z}_{k}$ is the observed centroid, $\boldsymbol{w}_{k-1}\sim\mathcal{N}(0,\boldsymbol{Q})$ is the process noise, and $\boldsymbol{v}_{k}\sim\mathcal{N}(0,\boldsymbol{R})$ is the measurement noise. \revadd{$\boldsymbol{H}$ is the observation matrix that extracts the position components from the state vector.} The transition matrix is block diagonal:
++where $\boldsymbol{z}_{k}$ is the observed centroid, $\boldsymbol{w}_{k-1}\sim\mathcal{N}(0,\boldsymbol{Q})$ is the process noise, and $\boldsymbol{v}_{k}\sim\mathcal{N}(0,\boldsymbol{R})$ is the measurement noise. \revadd{$\boldsymbol{H}$ is the observation matrix that extracts position components from the state vector.} The transition matrix is block diagonal:
+ \begin{equation}
+ \boldsymbol{F}=\mathrm{diag}(\boldsymbol{F}_{x},\boldsymbol{F}_{y},\boldsymbol{F}_{z}),
+ \end{equation}
+@@ -354,7 +354,7 @@
+ \end{equation}
+ The trace of $\boldsymbol{P}_{k}$ is used as an uncertainty indicator. When collision, sliding, or occlusion causes the observation model to fail, the uncertainty increases and can trigger active state regulation. This serves as a robust metric to determine whether the target is maintaining stable motion. 
+ 
+-For rotation prediction, since rotation on conveyor belts is typically gradual, we apply the same smoothing filter as the position estimation to the components of the quaternion $\boldsymbol{q}_t$. Finally, the target position for a future timestamp $t_p$ is computed as:
++For rotation prediction, since rotation on conveyor belts is typically gradual, we apply the same smoothing filter as the position estimation to the components of the quaternion $\boldsymbol{q}_t$. The target position for a future timestamp $t_p$ is computed as:
+ \begin{equation}
+ \boldsymbol{c}(t_p)=\hat{\boldsymbol{p}}_{\text{now}}+\hat{\boldsymbol{v}}_{\text{now}}(t_p-t_{\text{now}})+\frac{1}{2}\hat{\boldsymbol{a}}_{\text{now}}(t_p-t_{\text{now}})^2.
+ \end{equation}
+@@ -366,7 +366,7 @@
+ \|\boldsymbol{p}(t_f)-\boldsymbol{p}_{\text{start}}\|-\revaddmath{\bar v}(t_f-t_{\text{start}})=0,
+ \label{eq:interception}
+ \end{equation}
+-where \revadd{$\bar v$} is the average feasible robot velocity. \eqref{eq:interception} is solved iteratively using Newton--Raphson updates. To compensate for neglected acceleration and jerk constraints, a buffer term is added:
++where \revadd{$\bar v$} is the average feasible robot velocity. \eqref{eq:interception} is solved using Newton--Raphson updates. To compensate for neglected acceleration and jerk constraints, a buffer term is added:
+ \begin{equation}
+ t_f'=t_f+\Delta t_{\text{buffer}},\quad
+ \Delta t_{\text{buffer}}=\alpha\frac{v_{\text{\text{max}}}}{a_{\text{\text{max}}}}, \label{equ:estimate}
+--- a/grasping/problem.tex
++++ b/grasping/problem.tex
+@@ -9,11 +9,11 @@
+ \label{fig:overview}
+ \end{figure*}
+ 
+-The central design principle is to avoid irreversible error propagation. A segmentation error can create 3D outliers, a distorted OBB can produce an incorrect grasp pose, and an inaccurate pose can further cause poor placement. Therefore, each stage is designed to evaluate and refine the information passed to the next stage. The framework also closes the loop at the physical level: when passive perception is insufficient, the robot actively changes the state of the baggage to recover observability.
++The central design principle is to avoid irreversible error propagation. A segmentation error can create 3D outliers, a distorted OBB can produce an incorrect grasp pose, and an inaccurate pose can further cause poor placement. Therefore, each stage is designed to evaluate and refine the information passed to the next stage. The framework also closes the loop at the physical level: when passive perception is insufficient, the robot changes the state of the baggage to recover observability.
+ 
+ \subsection{Task Definition}
+ Let $\mathcal{I}_{t}=(I_{t}^{\text{rgb}},I_{t}^{d})$ denote the RGB-D observation at time $t$. The system estimates an object state
+ \begin{equation}
+ \boldsymbol{b}_{t}=\{\boldsymbol{p}_{t},\boldsymbol{R}_{t},\boldsymbol{s}_{t}\},
+ \end{equation}
+-where $\boldsymbol{p}_{t}$, $\boldsymbol{R}_{t}$, and $\boldsymbol{s}_{t}$ denote the centroid, orientation, and size of the target baggage, respectively. Given the current robot end-effector state $\boldsymbol{x}^{\text{EE}}_{t}$ and the predicted target state $\widehat{\boldsymbol{b}}_{t+\Delta}$, the objective is to generate a grasp trajectory that reaches \revadd{a feasible grasp pose for the hybrid end-effector} with bounded position and yaw errors. In the experiments, precision success requires a position error below \revadd{2~$\mathrm{cm}$} and a yaw error below $5^{\circ}$.+where $\boldsymbol{p}_{t}$, $\boldsymbol{R}_{t}$, and $\boldsymbol{s}_{t}$ denote the centroid, orientation, and size of the target baggage, respectively. Given the current robot end-effector state $\boldsymbol{x}^{\text{EE}}_{t}$ and the predicted target state $\widehat{\boldsymbol{b}}_{t+\Delta}$, the objective is to generate a grasp trajectory that reaches \revadd{a feasible grasp pose for the hybrid end-effector} with bounded position and yaw errors. Precision success requires a position error below \revadd{2~$\mathrm{cm}$} and a yaw error below $5^{\circ}$.--- a/grasping/related.tex
++++ b/grasping/related.tex
+@@ -1,6 +1,6 @@
+ \section{\revadd{Related Work}}
+ \subsection{Object Detection and Instance Segmentation}
+-Accurate object perception is the foundation of robotic manipulation. Traditional 2D detectors such as Faster R-CNN \cite{ren2015faster} and 3D detectors such as PointNet++ \cite{qi2017pointnet++} and PV-RCNN \cite{shi2020pv} primarily output bounding boxes. Although bounding boxes are computationally efficient, they provide only coarse geometric support and can introduce significant extrapolation errors when baggage items overlap or touch each other. Instance segmentation methods, including Mask R-CNN \cite{he2017mask}, YOLACT \cite{bolya2019yolact}, and YOLO-based segmentation models \cite{Jocher_Ultralytics_YOLO26_Unified_2026}, provide pixel-level object separation and are therefore more suitable for downstream point-cloud extraction. Foundation models such as Segment Anything Model (SAM) \cite{kirillov2023segment} show strong generalization, but their computational cost is usually too high for embedded real-time robotic control. In this paper, a lightweight YOLOv10-based architecture is modified for baggage segmentation so that real-time inference can be maintained while the specific tag-interference problem is addressed.
++Accurate object perception is the foundation of robotic manipulation. Traditional 2D detectors such as Faster R-CNN \cite{ren2015faster} and 3D detectors such as PointNet++ \cite{qi2017pointnet++} and PV-RCNN \cite{shi2020pv} primarily output bounding boxes. Although bounding boxes are computationally efficient, they provide only coarse geometric support and can introduce significant extrapolation errors when baggage items overlap or touch each other. Instance segmentation methods, including Mask R-CNN \cite{he2017mask}, YOLACT \cite{bolya2019yolact}, and YOLO-based segmentation models \cite{Jocher_Ultralytics_YOLO26_Unified_2026}, provide pixel-level object separation and are therefore more suitable for downstream point-cloud extraction. Foundation models such as Segment Anything Model (SAM) \cite{kirillov2023segment} show strong generalization, but their computational cost is usually too high for embedded real-time robotic control. In this paper, a lightweight YOLOv10-based architecture is modified for baggage segmentation so that real-time inference can be maintained while the tag-interference problem is addressed.
+ 
+ \subsection{Geometric Modeling}
+ 
+@@ -26,7 +26,7 @@
+ \revadd{Occlusion and clutter can reduce confidence in object pose estimates, while unfavorable object poses can make grasp execution difficult and increase control uncertainty. Active state regulation addresses these conditions by adjusting object poses toward configurations that are easier to observe and grasp. A common approach is robotic rearrangement, which reconfigures cluttered scenes to facilitate target manipulation \cite{batra2020rearrangement}. Such actions can also improve state estimation by revealing occluded geometry, as studied in interactive perception \cite{bohg2017interactive}.}
+ \revadd{Wang et al. jointly learn pushing and grasping policies through self-supervision to improve target accessibility in dense clutter \cite{wang2024joint}. Hu et al. exploit equivariant models and grasp score optimization to coordinate pushing and grasping for target retrieval \cite{hu2025pushgrasp}. Lee and Kim plan sequences of prehensile and non-prehensile rearrangement actions to retrieve targets in confined workspaces while minimizing the number of relocations \cite{lee2025rearrangement}.}
+ 
+-For example, DexSinGrasp \cite{xu2025dexsingrasp} and OPG-Policy \cite{ding2024opg} use dexterous hands or end-effectors to separate the target from surrounding clutter during grasping. Murray et al. further proposed an interactive visual failure prediction strategy, where probing actions such as lifting or shaking are used before grasp execution \cite{murray2024learning}.
++DexSinGrasp \cite{xu2025dexsingrasp} and OPG-Policy \cite{ding2024opg} use dexterous hands or end-effectors to separate the target from surrounding clutter during grasping. Murray et al. further proposed an interactive visual failure prediction strategy, where probing actions such as lifting or shaking are used before grasp execution \cite{murray2024learning}.
+ 
+ \revadd{GraspView selects informative viewpoints and aligns multi-view RGB reconstructions for cluttered grasping \cite{wang2025graspview}. Here, the camera remains fixed and active state regulation changes the baggage configuration through suction-assisted relocation, followed by renewed perception and planning.}
+ 

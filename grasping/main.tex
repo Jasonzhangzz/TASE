@@ -13,13 +13,7 @@
 \usepackage{cite}
 \usepackage{booktabs}
 \usepackage{xcolor}
-\usepackage[normalem]{ulem}
-\DeclareRobustCommand{\reviewnote}[1]{{\normalfont\footnotesize\hyphenpenalty=10000\exhyphenpenalty=10000\color{blue}(#1)}}
 \DeclareRobustCommand{\revadd}[1]{{\color{red}#1}}
-\DeclareRobustCommand{\revdel}[1]{{\color{red}\sout{#1}}}
-\newcommand{\revdelmath}[1]{\begingroup\color{red}%
-  \setbox0=\hbox{$\displaystyle#1$}%
-  \rlap{\raisebox{0.45ex}{\rule{\wd0}{0.45pt}}}\box0\endgroup}
 \newcommand{\revaddmath}[1]{{\color{red}#1}}
 \makeatletter
 \newcommand{\revisionbibcolor}[1]{\normalcolor
@@ -31,6 +25,12 @@
 \expandafter\def\csname addedbib@chen2025adaptive\endcsname{}
 \expandafter\def\csname addedbib@wang2025graspview\endcsname{}
 \expandafter\def\csname addedbib@black2025realtime\endcsname{}
+\expandafter\def\csname addedbib@wang2024joint\endcsname{}
+\expandafter\def\csname addedbib@hu2025pushgrasp\endcsname{}
+\expandafter\def\csname addedbib@lee2025rearrangement\endcsname{}
+\expandafter\def\csname addedbib@lum2025dextrahg\endcsname{}
+\expandafter\def\csname addedbib@piacenza2024vfas\endcsname{}
+\expandafter\def\csname addedbib@yamada2026graspmpc\endcsname{}
 \makeatother
 \algrenewcommand{\algorithmiccomment}[1]{\hfill$\triangleright$ #1}
 \algrenewcommand\algorithmicrequire{\textbf{Input:}}
@@ -55,7 +55,7 @@
 \maketitle
 
 \begin{abstract}
-Robotic baggage handling in airport logistics requires not only reliable grasp execution but also accurate geometric alignment under high-throughput industrial constraints. Existing vision-based manipulation pipelines usually process perception, geometric modeling, and motion control as weakly coupled modules. As a result, their performance can degrade when baggage tags and straps introduce visual interference, when residual mask errors are amplified during 2D to 3D projection, or when conveyor motion causes temporally unstable observations. This paper presents a closed-loop perception--geometric modeling--control framework for dynamic robotic baggage handling. The proposed system improves 2D instance segmentation through multi-scale feature aggregation and attention-guided mask refinement, enhances 3D geometric reliability using pixel-to-3D cross-consistency filtering and temporal oriented bounding-box (OBB) stabilization, and performs predictive grasp execution through recursive state estimation, coarse-to-fine interception planning, and active state regulation. \revadd{By coupling instance segmentation and spatio-temporal geometric modeling for accurate baggage perception, motion planning for grasp trajectory generation, and hybrid suction--gripper operation for active state regulation under low-confidence conditions, the framework achieves robust dynamic grasping.} Experiments on a real robotic platform show that the general grasp success rate remains consistently high, increasing from 93.6\% to 96.4\%, while the precision success rate improves from 62.1\% to 92.7\%. These results indicate that the proposed framework primarily improves pose accuracy and placement reliability rather than merely increasing lift success, \revadd{supporting precision-oriented baggage handling for downstream loading.}
+Robotic baggage handling in airport logistics requires not only reliable grasp execution but also accurate geometric alignment under high-throughput industrial constraints. Existing vision-based manipulation pipelines usually process perception, geometric modeling, and motion control as weakly coupled modules. As a result, their performance can degrade when baggage tags and straps introduce visual interference, when residual mask errors are amplified during 2D to 3D projection, or when conveyor motion causes temporally unstable observations. This paper presents a closed-loop perception--geometric modeling--control framework for dynamic robotic baggage handling. The proposed system improves 2D instance segmentation through multi-scale feature aggregation and attention-guided mask refinement, enhances 3D geometric reliability using pixel-to-3D cross-consistency filtering and temporal oriented bounding-box (OBB) stabilization, and performs predictive grasp execution through recursive state estimation, coarse-to-fine interception planning, and active state regulation. \revadd{By coupling instance segmentation and spatio-temporal geometric modeling for accurate baggage perception, motion planning for grasp trajectory generation, and hybrid suction--gripper operation for active state regulation under low-confidence conditions, the framework achieves robust dynamic grasping.} Experiments on a real robotic platform show that the general grasp success rate remains high, increasing from 93.6\% to 96.4\%, while the precision success rate improves from 62.1\% to 92.7\%. These results indicate that the proposed framework primarily improves pose accuracy and placement reliability rather than merely increasing lift success, \revadd{supporting precision-oriented baggage handling for downstream loading.}
 \end{abstract}
 
 \renewcommand{\abstractname}{Note to Practitioners}

@@ -11,9 +11,9 @@ The proposed framework was deployed on a real robotic baggage-handling platform.
 
 The baggage distribution was designed according to airport statistics collected from three airports across eight flights, including 515 items. Suitcases accounted for 94\% of the samples, soft bags for 5\%, and irregular objects for 1\%. More than 90\% of the samples contained strong tag interference. To simulate operational difficulty, random scenarios were generated, including single baggage placement (83\%), two-item contact (10\%), three-item stacking (2\%), and sidewall occlusion (5\%).
 
- \revadd{For 2D segmentation evaluation, SegData comprises SegData-train (49,359 images) and SegData-test (10,344 images), captured under different illumination, viewpoints, and distances. The splits were grouped by baggage instance, with no acquisition sequence shared between training and testing. Initial manual annotations were independently checked by a second annotator, and disagreements were corrected.} For 3D modeling evaluation, OBBData-test was constructed from 1,209 suitcase samples selected from SegData-test. \revadd{The ground-truth OBBs were manually checked and refined against the corresponding 3D point clouds, followed by independent review and correction of disagreements.} Suitcases were selected because they dominate the baggage distribution and provide stable centroid and yaw references, whereas soft bags are deformable and difficult to annotate consistently.
+ \revadd{For 2D segmentation evaluation, SegData comprises SegData-train (49,359 images) and SegData-test (10,344 images), captured under different illumination, viewpoints, and distances. The splits were grouped by baggage instance, with no acquisition sequence shared between training and testing. Initial manual annotations were independently checked by a second annotator, and disagreements were corrected. For 3D modeling evaluation, OBBData-test contains 1,209 suitcase samples from SegData-test, augmented with corresponding point clouds and ground-truth OBB annotations. It shares these test samples and has no overlap with SegData-train. The ground-truth OBBs were manually checked and refined against the corresponding 3D point clouds, followed by independent review and correction of disagreements.} Suitcases were selected because they dominate the baggage distribution and provide stable centroid and yaw references, whereas soft bags are deformable and difficult to annotate consistently.
 
-\revadd{Table~\ref{tab:geometry_parameters} summarizes the core parameters. PX3C used a 0.005~m voxel size, a 0.005~m RANSAC distance threshold with 500 hypotheses per frame, and a 5\% candidate-OBB trim fraction. Neighborhood filtering used a 0.03~m radius and at least three neighbors, with $\epsilon_{\mathrm{prot}}=0.005~\mathrm{m}$. CAOS used a 0.15~m clustering tolerance and a minimum cluster size of 500, with $\tau_{\mathrm{in}}=0.010~\mathrm{m}$, $(w_p,w_r,w_s)=(2.0,1.06,0.38)$, and $\eta=1.0$. The voxel, RANSAC, trimming, and conditional-filter settings followed experiment records; neighborhood and clustering settings were fixed implementation choices.}
+\revadd{Table~\ref{tab:geometry_parameters} summarizes the core parameters. PX3C used a 0.005~m voxel size, a 0.005~m RANSAC distance threshold with 500 hypotheses per frame, and a 5\% candidate-OBB trim fraction. Neighborhood filtering used a 0.03~m radius and at least three neighbors, with $\epsilon_{\mathrm{prot}}=0.005~\mathrm{m}$. CAOS used a 0.15~m clustering tolerance and a minimum cluster size of 500, with $\tau_{\mathrm{in}}=0.010~\mathrm{m}$, $(w_p,w_r,w_s)=(2.0,1.06,0.38)$, and $\eta=1.0$. The voxel, RANSAC, trimming, and conditional-filter settings followed experiment records. Neighborhood and clustering settings were fixed implementation choices.}
 
 \begin{table}[!t]
 \color{red}
@@ -66,7 +66,7 @@ YOLOv10L & 0.9185 & 0.8877 \\
 \end{tabular}
 \end{table}
 
-The 4L-EMB-FPN improves mask mAP by 1.27\% compared with the YOLOv10L baseline, and the full MSAM-Net further increases the gain to 2.43\%. These results show that enhanced multi-scale aggregation and attention-guided mask refinement improve segmentation quality under tag and strap interference.
+The 4L-EMB-FPN improves mask mAP by 1.27\% compared with the YOLOv10L baseline, and the full MSAM-Net further increases the gain to 2.43\%. These results show that multi-scale aggregation and attention-guided mask refinement improve segmentation quality under tag and strap interference.
 
 Inference latency on the AX650N processor is reported in Table~\ref{tab:latency}. MSAM-Net increases the inference time from \revadd{21.1~$\mathrm{ms}$} to \revadd{43.6~$\mathrm{ms}$}, but remains below the \revadd{50~$\mathrm{ms}$} real-time threshold required for 20~Hz conveyor-based manipulation. By comparison, SAM-ViT-B requires \revadd{733.6~$\mathrm{ms}$} per frame and is therefore unsuitable for embedded real-time deployment in this system \revadd{(as shown in Fig.~\ref{fig:comparison_time}).} SAM was evaluated without task-specific fine-tuning and achieved a mask mAP of 0.69. However, the comparison primarily demonstrates computational feasibility under industrial constraints.
 
@@ -96,18 +96,18 @@ SAM-ViT-B & 733.6 \\
 \subsection{3D Modeling Accuracy}
 To evaluate PX3C and CAOS, dimension and pose estimation errors were computed on OBBData-test. Dimension error was defined as the absolute error in length, width, and height. Pose error included centroid localization error and yaw error in the X--Y plane. Fig.~\ref{fig:estimation} compares pose and dimension estimation before and after PX3C and CAOS.
 
-Compared with segmentation-only modeling, PX3C reduces the width estimation error by 35.5\%. The combined PX3C+CAOS pipeline further stabilizes the estimates. The length estimation error decreases by approximately 13.8\%, and the height estimation error reaches its minimum value of \revadd{0.33~$\mathrm{cm}$} when both modules are applied. The overall downward shift of the confidence intervals indicates consistent improvement.
+Compared with segmentation-only modeling, PX3C reduces the width estimation error by 35.5\%. The combined PX3C+CAOS pipeline further stabilizes the estimates. The length estimation error decreases by approximately 13.8\%, and the height estimation error reaches its minimum value of \revadd{0.33~$\mathrm{cm}$} when both modules are applied. The downward shift of the confidence intervals indicates consistent improvement.
 
 The pose-error distributions are shown in Fig.~\ref{fig:estimation}. Each scatter point corresponds to one sample, and the ellipses denote 95\% confidence regions. Localization error decreases from \revadd{2.38~$\mathrm{cm}$} using segmentation-only modeling to \revadd{1.36~$\mathrm{cm}$} with PX3C and to \revadd{0.88~$\mathrm{cm}$} with CAOS. Yaw error decreases from $1.38^{\circ}$ to $0.78^{\circ}$. These results confirm that PX3C suppresses geometric outliers and CAOS reduces temporal fluctuations.
 
 \begin{figure*}[!t]
 \centering
-\includegraphics[width=\textwidth]{figures/fig9_rev.pdf}
+\includegraphics[width=0.9\textwidth]{figures/fig9_rev.pdf}
 \caption{Qualitative OBB comparison before and after PX3C filtering.}
 \label{fig:represent}
 \end{figure*}
 
-Representative qualitative OBB comparisons are shown in Fig.~\ref{fig:represent}. Red boxes denote OBBs derived directly from segmentation, while green boxes denote refined OBBs after PX3C filtering. Flexible tags and ribbons are removed effectively, while rigid components such as handles and wheels are preserved. Temporal stabilization results are shown in Fig.~\ref{fig:temporal}, where CAOS reduces abrupt OBB fluctuations across consecutive frames caused by lighting variation, occlusion, and motion blur.
+Qualitative OBB comparisons are shown in Fig.~\ref{fig:represent}. Red boxes denote OBBs derived directly from segmentation, while green boxes denote refined OBBs after PX3C filtering. Flexible tags and ribbons are removed effectively, while rigid components such as handles and wheels are preserved. Temporal stabilization results are shown in Fig.~\ref{fig:temporal}, where CAOS reduces abrupt OBB fluctuations across consecutive frames caused by lighting variation, occlusion, and motion blur.
 
 \begin{figure}[!t]
 \centering
@@ -119,7 +119,7 @@ Representative qualitative OBB comparisons are shown in Fig.~\ref{fig:represent}
 
 
 \subsection{System-Level Grasping Performance}
-\revadd{Two metrics were used to evaluate system-level performance. General Success Rate (GSR) is the number of successful target grasps without dropping divided by all trials. Precision Success Rate (PSR) is the proportion of precise suitcase placements among successful suitcase grasps. We define precise placement as final placement with a position error below 2~$\mathrm{cm}$ and a yaw error below $5^{\circ}$, evaluated after the baggage has stabilized.} In multi-object scenarios, the highest object along the Z-axis was selected as the grasping target.
+\revadd{Two metrics were used to evaluate system-level performance. General Success Rate (GSR) is the number of successful target grasps without dropping divided by all trials. Precision Success Rate (PSR) is the proportion of precise suitcase placements among successful suitcase grasps. For successfully grasped suitcases, final position and yaw errors are measured after placement is complete and the suitcase has stabilized. Precise placement requires a position error below 2~$\mathrm{cm}$ and a yaw error below $5^{\circ}$.} In multi-object scenarios, the highest object along the Z-axis was selected as the grasping target.
 
 \revadd{Each of the five configurations was evaluated in 500 trials, for 2500 trials in total. Every configuration included 470 suitcase, 25 backpack, and 5 irregular-object trials, with the same scenario distribution: 83\% single-item placement, 10\% two-item contact, 2\% three-item stacking, and 5\% sidewall occlusion.} The snapshots are shown in Fig. \ref{fig:snapshot}. An ablation study was performed by incrementally integrating MSAM-Net, PX3C+CAOS, DKF+two-stage planning, and active state regulation. The results are summarized in Table~\ref{tab:ablation}. \revadd{For the full system, the short adjustment window on the moving conveyor limited each trial to at most one active reset. Relocation, renewed perception, replanning, and the subsequent gripper-based grasp belonged to the same trial and were counted once. A failed reset, failed subsequent grasp, or target leaving the robot workspace before grasp completion was counted as a failed trial. Intermediate reset placement was excluded from the final precision assessment.}
 
@@ -143,7 +143,7 @@ Method & GSR (\%) & PSR (\%) \\
 Baseline (YOLOv10L + PCL) & 93.6 & 62.1 \\
  \revadd{+ Instance segmentation (MSAM-Net)} & 95.2 & 69.6 \\
  \revadd{+ Geometric modeling (PX3C + CAOS)} & 95.6 & 83.8 \\
- \revadd{+ Predictive control (DKF + two-stage planning)} & 96.4 & 84.9 \\
+ \revadd{+ Motion planning (DKF + two-stage planning)} & 96.4 & 84.9 \\
 + Active State Regulation (full system) & 96.4 & 92.7 \\
 \bottomrule
 \end{tabular}

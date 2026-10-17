@@ -5,7 +5,7 @@ To balance segmentation accuracy and computational efficiency, MSAM-Net uses YOL
 
 \begin{figure*}[!t]
 \centering
-\includegraphics[width=\textwidth]{figures/fig2.pdf}
+\includegraphics[width=0.9\textwidth]{figures/fig2.pdf}
 \caption{Schematic overview of the proposed MSAM-Net architecture.}
 \label{fig:msam}
 \end{figure*}
@@ -254,7 +254,7 @@ k(1-q)
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig3_rev.pdf}
-\caption{System Workflow of the \revadd{Dynamic Grasping Strategy.}}
+\caption{(a) Hardware platform. (b) System Workflow of the \revadd{Dynamic Grasping Strategy.}}
 \label{fig:planning}
 \end{figure}
 
@@ -264,7 +264,7 @@ f_{\text{thin}}=\frac{\max_{p\in\mathcal{N}(i)}\langle\boldsymbol{p}-\bar{\bolds
 \min_{p\in\mathcal{N}(i)}\langle\boldsymbol{p}-\bar{\boldsymbol{p}},\boldsymbol{n}\rangle}{L_{\min}},
 \label{eq:fthin}
 \end{equation}
-where $\mathcal{N}(i)$ is the local neighborhood, $\bar{\boldsymbol{p}}$ is the neighborhood centroid, and $\boldsymbol{n}$ is the average normal. The protrusion feature measures the normalized distance outside the provisional OBB:
+where $\mathcal{N}(i)$ is the local neighborhood, $\bar{\boldsymbol{p}}$ is the neighborhood centroid, and $\boldsymbol{n}$ is the average normal. The protrusion feature measures the normalized distance outside the OBB:
 \begin{equation}
 f_{\text{\text{prot}}}=\max\{0,d_{\text{\text{out}}}(i)/\epsilon_{\text{\text{prot}}}\},
 \label{eq:fprot}
@@ -305,7 +305,7 @@ where $\boldsymbol{b}^{*}$ is the last reliable snapshot, $\boldsymbol{b}_{t}^{\
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig4.pdf}
-\caption{Schematic Diagram of the Interception Point $P_{\text{\text{in}}}$ and Rapid Interception Strategy.}
+\caption{Diagram of the Interception Point $P_{\text{\text{in}}}$ and Rapid Interception Strategy.}
 \label{fig:rapid_interception}
 \end{figure}
 
@@ -324,7 +324,7 @@ The process and observation models are
 \end{cases}
 \label{eq:state}
 \end{equation}
-where $\boldsymbol{z}_{k}$ is the observed centroid, $\boldsymbol{w}_{k-1}\sim\mathcal{N}(0,\boldsymbol{Q})$ is the process noise, and $\boldsymbol{v}_{k}\sim\mathcal{N}(0,\boldsymbol{R})$ is the measurement noise. \revadd{$\boldsymbol{H}$ is the observation matrix that extracts the position components from the state vector.} The transition matrix is block diagonal:
+where $\boldsymbol{z}_{k}$ is the observed centroid, $\boldsymbol{w}_{k-1}\sim\mathcal{N}(0,\boldsymbol{Q})$ is the process noise, and $\boldsymbol{v}_{k}\sim\mathcal{N}(0,\boldsymbol{R})$ is the measurement noise. \revadd{$\boldsymbol{H}$ is the observation matrix that extracts position components from the state vector.} The transition matrix is block diagonal:
 \begin{equation}
 \boldsymbol{F}=\mathrm{diag}(\boldsymbol{F}_{x},\boldsymbol{F}_{y},\boldsymbol{F}_{z}),
 \end{equation}
@@ -354,7 +354,7 @@ and in the \textit{Update} phase, the Kalman Gain $\boldsymbol{K}_{k}$ is comput
 \end{equation}
 The trace of $\boldsymbol{P}_{k}$ is used as an uncertainty indicator. When collision, sliding, or occlusion causes the observation model to fail, the uncertainty increases and can trigger active state regulation. This serves as a robust metric to determine whether the target is maintaining stable motion. 
 
-For rotation prediction, since rotation on conveyor belts is typically gradual, we apply the same smoothing filter as the position estimation to the components of the quaternion $\boldsymbol{q}_t$. Finally, the target position for a future timestamp $t_p$ is computed as:
+For rotation prediction, since rotation on conveyor belts is typically gradual, we apply the same smoothing filter as the position estimation to the components of the quaternion $\boldsymbol{q}_t$. The target position for a future timestamp $t_p$ is computed as:
 \begin{equation}
 \boldsymbol{c}(t_p)=\hat{\boldsymbol{p}}_{\text{now}}+\hat{\boldsymbol{v}}_{\text{now}}(t_p-t_{\text{now}})+\frac{1}{2}\hat{\boldsymbol{a}}_{\text{now}}(t_p-t_{\text{now}})^2.
 \end{equation}
@@ -366,7 +366,7 @@ The grasping planner contains two stages, as shown in Algorithm~\ref{algo:two_st
 \|\boldsymbol{p}(t_f)-\boldsymbol{p}_{\text{start}}\|-\revaddmath{\bar v}(t_f-t_{\text{start}})=0,
 \label{eq:interception}
 \end{equation}
-where \revadd{$\bar v$} is the average feasible robot velocity. \eqref{eq:interception} is solved iteratively using Newton--Raphson updates. To compensate for neglected acceleration and jerk constraints, a buffer term is added:
+where \revadd{$\bar v$} is the average feasible robot velocity. \eqref{eq:interception} is solved using Newton--Raphson updates. To compensate for neglected acceleration and jerk constraints, a buffer term is added:
 \begin{equation}
 t_f'=t_f+\Delta t_{\text{buffer}},\quad
 \Delta t_{\text{buffer}}=\alpha\frac{v_{\text{\text{max}}}}{a_{\text{\text{max}}}}, \label{equ:estimate}
