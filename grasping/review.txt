@@ -1,0 +1,66 @@
+T-ASE-2026-3501
+
+Associate Editor
+Comments to the Author:
+This paper presents a vision-driven closed-loop framework for high-precision robotic baggage handling in airport logistics environments, addressing an automation challenge in industrial material handling. The experimental validation on a real robotic platform demonstrates an improvement in precision success rate, highlighting the practical value of the proposed approach for high-density baggage loading applications.
+
+The handling AE received three reviews, and several major issues include 1) clarification of novelty versus integration of existing techniques; 2) specification of key parameters and thresholds to ensure reproducibility; 3) clarification of the evaluation protocol for active state regulation; and 4) expansion of the related work and limitations discussion.
+
+The authors should carefully and seriously address all the concerns before consideration for publication.
+
+Reviewer's comments to author:
+
+Reviewer: 1
+
+Comments to the Authors
+
+Please comment on Major Contribution of the Paper, Organization and Style, Technical Accuracy, Presentation and Adequacy of Citations (List possible additions if needed).
+This paper proposes a vision-driven framework consists of perception, geometric modeling, planning and control for high-precision robotic baggage grasping. It addresses several coupled problems in practical airport logistics, including tag/strap interference in instance segmentation, geometric distortion introduced during 2D-to-3D projection, temporal instability of OBB estimation, and motion uncertainty during dynamic grasping. The main contributions include MSAM-Net for multi-scale feature aggregation and attention-guided mask refinement, the PX3C+CAOS spatio-temporal geometric modeling pipeline for residual outlier suppression and OBB stabilization, and a dynamic grasping strategy that combines recursive Bayesian state estimation, two-stage relative-velocity planning, and active state regulation. The integrated framework improves grasping success rates and robustness under dynamic grasping conditions and geometric uncertainties. Experiments further demonstrate its feasibility for implementation in real-world airport baggage handling scenarios. However, the manuscript still has several minor issues that should be addressed before publication.
+
+1. The contribution statements in the Introduction should be clarified. The authors need to explicitly distinguish the genuinely novel components from the task-specific adaptation or integration of existing techniques (e.g., YOLOv10, PCA/OBB modeling, and Kalman filtering). A short sentence clarifying the novelty of each contribution would make the technical contribution easier to understand.
+
+2. The terminology used for the overall framework should be made consistent throughout the manuscript. Expressions such as “perception–geometric modeling–control,” “semantic perception,” “instance segmentation,” “active interaction,” and “active state regulation” are sometimes used interchangeably. It would improve readability if one preferred term were selected for each module and used consistently in the title, abstract, figures, main text, and conclusion.
+
+3. The description of the end-effector and grasping mode should be clarified. The Abstract emphasizes the precision requirements of “suction-based grasping,” whereas the Introduction states that the gripper is the primary interaction mode and suction is only complementary. The authors should revise the Abstract and related descriptions so that the claimed application scenario is fully consistent with the actual hybrid suction–gripper system.
+
+4. Several spelling errors should be corrected. For example, “RELATED WORKS” would normally be written as “RELATED WORK”; the caption of Fig. 3 contains “Dynamic Grasping Strateg.”, which should be “Dynamic Grasping Strategy”; the sentence around Fig. 6 contains an unmatched parenthesis; and the Acknowledgments section still contains template text (“This should be a simple paragraph ...”), which should be replaced or removed before submission.
+
+5. The evaluation protocol for active state regulation is not clearly described.
+The manuscript does not specify whether the reset and subsequent re-grasp are counted as part of the same trial, whether multiple resets are allowed, or when the final PSR is evaluated. These details should be clarified to ensure a clear interpretation of the reported improvement.
+
+6. The parameter settings and tuning strategy are insufficiently specified.
+Several important thresholds and weights in PX3C, CAOS, the Kalman filter, and the motion planner are not explicitly reported. The authors should provide the main parameter values and briefly explain how they were selected or tuned.
+
+7. The definition of the dataset should be clearer. The manuscript first introduces “SegData” as a dataset containing training and testing images, while later sections refer to “SegData-train” and “SegData-test.” It would be better to define these two splits explicitly at their first occurrence and then use the same names consistently. The relationship between SegData-test and OBBData-test could also be stated in one concise sentence.
+
+8. The notation in the manuscript should be further checked. For example, the Kalman-filter derivation uses both F and F_x in closely related equations, while the state estimate is written with slightly different hat/subscript conventions in different places. It is recommended to add a chart or list of the definition of the variables in the manuscript.
+
+Reviewer: 2
+
+Comments to the Authors
+
+Please comment on Major Contribution of the Paper, Organization and Style, Technical Accuracy, Presentation and Adequacy of Citations (List possible additions if needed).
+This paper presents a vision-driven closed-loop framework for high-precision robotic baggage handling on a moving conveyor. It integrates enhanced instance segmentation, pixel-to-3D filtering, temporally stabilized OBB estimation, predictive planning, and active state regulation. The real-platform experiments are practically relevant and demonstrate a clear improvement in precision success rate. Overall, the manuscript is technically sound, clearly presented. Please see my comments below for my concerns.
+
+1.The proposed framework is described clearly and contains several well-integrated components. To make the implementation easier to follow and reproduce, it would be helpful to provide the values of a few key parameters that are not currently specified, such as the loss weights in (4), the main PX3C and CAOS thresholds, and the principal DKF and planning settings. These values may be added briefly in the corresponding sections or in supplementary material.
+2.The relatively large SegData dataset and the manually refined OBBData-test set provide valuable support for the experimental evaluation. The manuscript would be clearer if the authors clarified whether the training and test sets were separated at the image, sequence, or baggage-instance level, and briefly described how the manual annotations were checked.
+3.Table III clearly illustrates the progressive benefit of the proposed modules at the system level. For completeness, the authors may briefly clarify whether all configurations followed the same scenario distribution and how the 500 trials were allocated among the rows. This small addition would help readers interpret the comparison more easily.
+4.The figures and algorithms are generally informative and make the overall workflow easy to understand. Please correct the minor typo “Dynamic Grasping Strateg” in the caption of Fig. 3. In addition, the Acknowledgments section still contains template placeholder text and should be replaced with the final acknowledgment or removed if it is not applicable.
+5.The manuscript is generally well written. A final light proofreading would further improve its presentation. For example, please standardize the spacing between numerical values and units (e.g., “0.5 m/s,” “2 cm,” and “80 mm”) and verify whether “Close gripper” in Algorithm 3 accurately describes the suction-based execution discussed in the text.
+
+Reviewer: 3
+
+Comments to the Authors
+
+Please comment on Major Contribution of the Paper, Organization and Style, Technical Accuracy, Presentation and Adequacy of Citations (List possible additions if needed).
+The manuscript presents a practical and well-integrated framework for high-precision robotic baggage handling, with convincing validation on a real robotic platform. I believe the manuscript can be considered for publication after revision.
+
+-The authors are encouraged to better distinguish the methodological novelty of the proposed modules from the novelty arising from their integration into a complete closed-loop baggage-handling system.
+
+-The related-work section could be made more comprehensive, particularly with respect to recent work on dynamic robotic grasping, active perception/rearrangement, and real-time perception-to-action systems.
+
+-Please expand the discussion of limitations. For example, the current evaluation is dominated by suitcase-type baggage and relatively structured conveyor settings. The generalizability to more deformable baggage, more severe clutter, different conveyor conditions, and other airport environments should be discussed.
+
+-The authors are encouraged to further discuss the practical significance of the large improvement in Precision Success Rate compared with the relatively modest improvement in General Success Rate. This would help readers better understand why precise pose estimation and placement reliability are particularly important for real airport baggage-handling applications.
+
+-Please strengthen the discussion of the overall closed-loop design. In particular, it would be useful to explain more clearly how the interaction between perception, geometric modeling, prediction, and active state regulation contributes to robustness compared with conventional weakly coupled perception-and-control pipelines.

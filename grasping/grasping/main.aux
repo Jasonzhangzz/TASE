@@ -1,0 +1,154 @@
+\relax 
+\citation{hutchinson2002tutorial}
+\citation{he2017mask}
+\citation{rusu20113d,gottschalk1996obbtree}
+\citation{bohg2013data}
+\@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}{}\protected@file@percent }
+\citation{chaumette2008visual}
+\citation{wang2023visual,he2023image}
+\citation{lippiello2007position}
+\citation{zhu2024position,chaumette2008visual}
+\citation{ren2015faster}
+\citation{qi2017pointnet++}
+\citation{shi2020pv}
+\citation{he2017mask}
+\citation{bolya2019yolact}
+\citation{Jocher_Ultralytics_YOLO26_Unified_2026}
+\citation{kirillov2023segment}
+\citation{rusu20113d}
+\citation{fischler1981random}
+\citation{xie2025hdcnet}
+\@writefile{toc}{\contentsline {section}{\numberline {II}Related Works}{2}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-A}}Visual Servoing for Robotic Manipulation}{2}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-B}}Object Detection and Instance Segmentation}{2}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-C}}3D Geometric Modeling and Point-Cloud Refinement}{2}{}\protected@file@percent }
+\citation{digne2017bilateral,si2022lbf}
+\citation{hu2020feature}
+\citation{hermosilla2019total,rakotosaona2020pointcleannet}
+\citation{yu2018ec}
+\citation{hu2025dynamic}
+\citation{hu2021dynamic}
+\citation{bohg2013data}
+\citation{alahi2016social}
+\citation{li2003survey}
+\citation{cowley2013perception}
+\citation{bohg2017interactive}
+\citation{batra2020rearrangement}
+\citation{xu2025dexsingrasp}
+\citation{ding2024opg}
+\citation{murray2024learning}
+\citation{zitkovich2023rt}
+\citation{black2024pi_0,intelligence2025vision}
+\citation{kim2024openvla}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-D}}Dynamic Grasping and Active Perception}{3}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {III}System Overview and Problem Formulation}{3}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-A}}System Architecture}{3}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Overall framework of the proposed closed-loop perception, geometric modeling, and control system. RGB-D frames are first processed through instance segmentation (MSAM-Net) for mask refinement. The resulting point clouds undergo geometric consistency filtering (PX3C) and temporal stabilization (CAOS) to produce a reliable 3D representation. State estimation uses a Kalman-filter-based spatiotemporal approach, followed by two-stage motion planning in relative velocity space. Active interaction reduces environmental entropy and resets unstable object states, enabling robust real-time execution.}}{4}{}\protected@file@percent }
+\newlabel{fig:overview}{{1}{4}{}{figure.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-B}}Task Definition}{4}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Proposed Method}{4}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-A}}Semantic Perception With MSAM-Net}{4}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-A}1}Network Design}{4}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Schematic overview of the proposed MSAM-Net architecture.}}{5}{}\protected@file@percent }
+\newlabel{fig:msam}{{2}{5}{}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-A}2}Attention-Guided Multi-Scale Mask Module}{5}{}\protected@file@percent }
+\newlabel{eq:attention}{{2}{5}{}{equation.2}{}}
+\newlabel{eq:mse}{{3}{5}{}{equation.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-A}3}Training Objective}{5}{}\protected@file@percent }
+\newlabel{eq:loss}{{4}{5}{}{equation.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-B}}Interference-Free 3D Modeling}{5}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-B}1}PX3C Filtering}{5}{}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Pixel-to-3D Cross Consistency Conditional Filtering (PX3C)}}{6}{}\protected@file@percent }
+\newlabel{alg:px3c}{{1}{6}{}{algorithm.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces System Workflow of the Dynamic Grasping Strateg.}}{6}{}\protected@file@percent }
+\newlabel{fig:planning}{{3}{6}{}{figure.3}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Consistency-Aware OBB Stabilization (CAOS)}}{6}{}\protected@file@percent }
+\newlabel{alg:caos}{{2}{6}{}{algorithm.2}{}}
+\newlabel{eq:fthin}{{5}{6}{}{equation.5}{}}
+\newlabel{eq:fprot}{{6}{6}{}{equation.6}{}}
+\newlabel{eq:fnorm}{{7}{6}{}{equation.7}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-B}2}CAOS Temporal Stabilization}{6}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Schematic Diagram of the Interception Point $P_{\text  {\text  {in}}}$ and Rapid Interception Strategy.}}{7}{}\protected@file@percent }
+\newlabel{fig:rapid_interception}{{4}{7}{}{figure.4}{}}
+\newlabel{eq:qcov}{{8}{7}{}{equation.8}{}}
+\newlabel{eq:qstab}{{9}{7}{}{equation.9}{}}
+\newlabel{eq:caos}{{11}{7}{}{equation.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-C}}Dynamic Grasping and Active Interaction}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-C}1}Recursive Bayesian State Estimation}{7}{}\protected@file@percent }
+\newlabel{eq:state}{{13}{7}{}{equation.13}{}}
+\newlabel{eq:fx}{{15}{7}{}{equation.15}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-C}2}Coarse-to-Fine Planning in Relative Velocity Space}{7}{}\protected@file@percent }
+\newlabel{eq:interception}{{19}{7}{}{equation.19}{}}
+\newlabel{equ:estimate}{{20}{7}{}{equation.20}{}}
+\newlabel{eq:sync}{{21}{7}{}{equation.21}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Robotic baggage-handling platform.}}{8}{}\protected@file@percent }
+\newlabel{fig:setup}{{5}{8}{}{figure.5}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Two-Stage Dynamic Grasping Planning Strategy}}{8}{}\protected@file@percent }
+\newlabel{algo:two_stage_dynamic_grasping}{{3}{8}{}{algorithm.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Mask mAP versus inference time for different segmentation models.}}{8}{}\protected@file@percent }
+\newlabel{fig:comparison_time}{{6}{8}{}{figure.6}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-C}3}Active State Regulation}{8}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {V}Experiments and Results}{8}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-A}}Experimental Setup}{8}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Segmentation performance on SegData-test.}}{9}{}\protected@file@percent }
+\newlabel{tab:seg}{{I}{9}{}{table.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Inference time comparison on AX650N.}}{9}{}\protected@file@percent }
+\newlabel{tab:latency}{{II}{9}{}{table.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-B}}Segmentation Performance}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-C}}3D Modeling Accuracy}{9}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Comparison of dimension estimation errors before and after PX3C and CAOS. Error bars indicate 95\% confidence intervals.}}{9}{}\protected@file@percent }
+\newlabel{fig:estimation}{{7}{9}{}{figure.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Localization and yaw error distributions for different modeling stages. Ellipses represent 95\% confidence regions.}}{9}{}\protected@file@percent }
+\newlabel{fig:disturbance}{{8}{9}{}{figure.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Qualitative OBB comparison before and after PX3C filtering.}}{10}{}\protected@file@percent }
+\newlabel{fig:represent}{{9}{10}{}{figure.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces OBB predictions across consecutive frames with CAOS stabilization.}}{10}{}\protected@file@percent }
+\newlabel{fig:temporal}{{10}{10}{}{figure.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-D}}System-Level Grasping Performance}{10}{}\protected@file@percent }
+\bibdata{reference}
+\bibcite{hutchinson2002tutorial}{1}
+\bibcite{he2017mask}{2}
+\bibcite{rusu20113d}{3}
+\bibcite{gottschalk1996obbtree}{4}
+\bibcite{bohg2013data}{5}
+\bibcite{chaumette2008visual}{6}
+\bibcite{wang2023visual}{7}
+\bibcite{he2023image}{8}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Snapshots of the dynamic grasping experiment. The proposed framework achieves robust dynamic grasping on a real conveyor belt in an industrial environment, overcoming the challenges of high-speed motion, cluttered scenes, and control uncertainty.}}{11}{}\protected@file@percent }
+\newlabel{fig:snapshot}{{11}{11}{}{figure.11}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Ablation study of different modules on grasping performance.}}{11}{}\protected@file@percent }
+\newlabel{tab:ablation}{{III}{11}{}{table.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion and Future Work}{11}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{References}{11}{}\protected@file@percent }
+\bibcite{lippiello2007position}{9}
+\bibcite{zhu2024position}{10}
+\bibcite{ren2015faster}{11}
+\bibcite{qi2017pointnet++}{12}
+\bibcite{shi2020pv}{13}
+\bibcite{bolya2019yolact}{14}
+\bibcite{Jocher_Ultralytics_YOLO26_Unified_2026}{15}
+\bibcite{kirillov2023segment}{16}
+\bibcite{fischler1981random}{17}
+\bibcite{xie2025hdcnet}{18}
+\bibcite{digne2017bilateral}{19}
+\bibcite{si2022lbf}{20}
+\bibcite{hu2020feature}{21}
+\bibcite{hermosilla2019total}{22}
+\bibcite{rakotosaona2020pointcleannet}{23}
+\bibcite{yu2018ec}{24}
+\bibcite{hu2025dynamic}{25}
+\bibcite{hu2021dynamic}{26}
+\bibcite{alahi2016social}{27}
+\bibcite{li2003survey}{28}
+\bibcite{cowley2013perception}{29}
+\bibcite{bohg2017interactive}{30}
+\bibcite{batra2020rearrangement}{31}
+\bibcite{xu2025dexsingrasp}{32}
+\bibcite{ding2024opg}{33}
+\bibcite{murray2024learning}{34}
+\bibcite{zitkovich2023rt}{35}
+\bibcite{black2024pi_0}{36}
+\bibcite{intelligence2025vision}{37}
+\bibcite{kim2024openvla}{38}
+\bibstyle{IEEEtran}
+\gdef \@abspage@last{12}
