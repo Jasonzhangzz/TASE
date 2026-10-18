@@ -13,8 +13,16 @@
 \usepackage{cite}
 \usepackage{booktabs}
 \usepackage{xcolor}
+% Compact, stable spacing around floats and captions.
+\setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
+\setlength{\floatsep}{8pt plus 2pt minus 2pt}
+\setlength{\intextsep}{8pt plus 2pt minus 2pt}
+\setlength{\abovecaptionskip}{3pt}
+\setlength{\belowcaptionskip}{0pt}
 \DeclareRobustCommand{\revadd}[1]{{\color{red}#1}}
 \newcommand{\revaddmath}[1]{{\color{red}#1}}
+\DeclareRobustCommand{\revfix}[1]{{\color{blue}#1}}
+\newcommand{\revfixmath}[1]{{\color{blue}#1}}
 \makeatletter
 \newcommand{\revisionbibcolor}[1]{\normalcolor
   \ifcsname addedbib@#1\endcsname\color{red}\fi}

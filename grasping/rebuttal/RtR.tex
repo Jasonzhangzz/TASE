@@ -6,6 +6,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{booktabs}
+\usepackage{array}
 \usepackage{xcolor}
 \usepackage[hidelinks]{hyperref}
 
@@ -21,18 +22,23 @@
 
 \newcommand{\reviewer}[1]{%
   \par\smallskip\noindent
-  \textcolor{responseblue}{\textbf{#1\hspace{0.2em}}}%
+  \textcolor{responseblue}{\textbf{#1\hspace{0.2em}}}\par\nobreak%
 }
 
 \newcommand{\question}[2]{%
   \par\smallskip\noindent
   % Keep the template question labels and the verbatim source text.
-  {\color{responseblue}\bfseries Q#1: #2\par}%
+  {\color{responseblue}\bfseries\clubpenalty=10000\widowpenalty=10000 Q#1: #2\par}%
   \par\nobreak\noindent
 }
 \newcommand{\answer}{%
   \par\smallskip\noindent
   \textbf{Answer: }\ignorespaces
+}
+\newcommand{\reviewercomments}{%
+  \par\smallskip\noindent
+  {\color{responseblue}\bfseries Comments to the Authors\par\nobreak}%
+  \noindent\ignorespaces
 }
 
 % If you wish to avoid re-using figure, table, and equation numbers from
@@ -84,9 +90,7 @@ Thank you for your constructive assessment. We have clarified the methodological
 
 \reviewer{Reviewer: 1}
 
-Comments to the Authors
-
-Please comment on Major Contribution of the Paper, Organization and Style, Technical Accuracy, Presentation and Adequacy of Citations (List possible additions if needed).
+\reviewercomments
 This paper proposes a vision-driven framework consists of perception, geometric modeling, planning and control for high-precision robotic baggage grasping. It addresses several coupled problems in practical airport logistics, including tag/strap interference in instance segmentation, geometric distortion introduced during 2D-to-3D projection, temporal instability of OBB estimation, and motion uncertainty during dynamic grasping. The main contributions include MSAM-Net for multi-scale feature aggregation and attention-guided mask refinement, the PX3C+CAOS spatio-temporal geometric modeling pipeline for residual outlier suppression and OBB stabilization, and a dynamic grasping strategy that combines recursive Bayesian state estimation, two-stage relative-velocity planning, and active state regulation. The integrated framework improves grasping success rates and robustness under dynamic grasping conditions and geometric uncertainties. Experiments further demonstrate its feasibility for implementation in real-world airport baggage handling scenarios. However, the manuscript still has several minor issues that should be addressed before publication.
 
 \question{1}{The contribution statements in the Introduction should be clarified. The authors need to explicitly distinguish the genuinely novel components from the task-specific adaptation or integration of existing techniques (e.g., YOLOv10, PCA/OBB modeling, and Kalman filtering). A short sentence clarifying the novelty of each contribution would make the technical contribution easier to understand.}
@@ -105,12 +109,12 @@ We have revised the \textit{Introduction} to distinguish these contributions fro
 \question{2}{The terminology used for the overall framework should be made consistent throughout the manuscript. Expressions such as “perception–geometric modeling–control,” “semantic perception,” “instance segmentation,” “active interaction,” and “active state regulation” are sometimes used interchangeably. It would improve readability if one preferred term were selected for each module and used consistently in the title, abstract, figures, main text, and conclusion.}
 
 \answer
-Thank you for your suggestion. We have standardized the terminology throughout the revised manuscript. The four modules are consistently referred to as ``instance segmentation,'' ``spatio-temporal geometric modeling,'' ``motion planning,'' and ``active state regulation.'' The overall framework is described as a closed-loop perception--geometric modeling--control pipeline. We have aligned the Abstract, Introduction, system description, method headings, ablation table, and Conclusion with these terms. The revisions are highlighted in red in the \textit{Abstract on page~1}, the \textit{Introduction on page~2}, \textit{Section~III-A on page~4}, the \textit{caption of Fig.~1 on page~5}, the \textit{method subsection headings on pages~4 and~6}, and \textit{Table~IV and the Conclusion on page~10}.
+Thank you for your suggestion. We have standardized the terminology throughout the revised manuscript. The four modules are consistently referred to as ``instance segmentation,'' ``spatio-temporal geometric modeling,'' ``motion planning,'' and ``active state regulation.'' The overall framework is described as a closed-loop perception--geometric modeling--control pipeline. We have aligned the Abstract, Introduction, system description, method headings, ablation table, and Conclusion with these terms. The revisions are highlighted in red in the \textit{Abstract on page~1}, the \textit{Introduction on page~2}, \textit{Section~III-A on page~4}, the \textit{caption of Fig.~1 on page~5}, the \textit{method subsection headings on pages~4 and~6}, \textit{Table~IV on page~10}, and the \textit{Conclusion on page~11}.
 
 \question{3}{The description of the end-effector and grasping mode should be clarified. The Abstract emphasizes the precision requirements of “suction-based grasping,” whereas the Introduction states that the gripper is the primary interaction mode and suction is only complementary. The authors should revise the Abstract and related descriptions so that the claimed application scenario is fully consistent with the actual hybrid suction–gripper system.}
 
 \answer
-Thank you for pointing out this inconsistency. Our hybrid end-effector uses the gripper for normal dynamic grasping and suction for coarse relocation during active state regulation. Relocation is followed by renewed perception, state estimation, and planning for gripper-based grasping. We have revised the manuscript to clarify these roles. The revisions are highlighted in red in the \textit{Abstract on page~1}, the \textit{Introduction on page~2}, \textit{Section~III-B on page~4}, and \textit{Section~IV-C3 on page~8}.
+Thank you for pointing out this inconsistency. Our hybrid end-effector uses the gripper for normal dynamic grasping and suction for coarse relocation during active state regulation. Relocation is followed by renewed perception, state estimation, and planning for gripper-based grasping. We have revised the manuscript to clarify these roles. The revisions are highlighted in red in the \textit{Abstract on page~1}, the \textit{Introduction on page~2}, \textit{Section~III-B on page~4}, and \textit{Section~IV-D3 on page~8}.
 
 \question{4}{Several spelling errors should be corrected. For example, “RELATED WORKS” would normally be written as “RELATED WORK”; the caption of Fig. 3 contains “Dynamic Grasping Strateg.”, which should be “Dynamic Grasping Strategy”; the sentence around Fig. 6 contains an unmatched parenthesis; and the Acknowledgments section still contains template text (“This should be a simple paragraph ...”), which should be replaced or removed before submission.}
 
@@ -121,7 +125,7 @@ Thank you for your careful proofreading. We have corrected ``Related Work,'' ``D
 The manuscript does not specify whether the reset and subsequent re-grasp are counted as part of the same trial, whether multiple resets are allowed, or when the final PSR is evaluated. These details should be clarified to ensure a clear interpretation of the reported improvement.}
 
 \answer
-Thank you for your suggestion. Because continuous conveyor motion provides only a limited window for manipulation, our experiments allow at most one active reset per trial. Relocation, renewed perception, replanning, and the subsequent grasp count as one trial. Reset failure, grasp failure, or departure from the workspace before grasp completion counts as a failed trial. Only successful suitcase grasps enter the denominator of PSR. For each such trial, position and yaw errors are measured after the subsequent final placement is completed and the suitcase has stabilized. PSR is the fraction of these trials with position and yaw errors below 2~cm and $5^{\circ}$. The intermediate reset pose and the pose at initial grasp completion are excluded. We have clarified this evaluation sequence in \textit{Section~V-D on page~10}, with the revisions highlighted in red.
+Thank you for your suggestion. Because continuous conveyor motion provides only a limited manipulation window, we allow at most one active reset per trial. Relocation, renewed perception, replanning, and the subsequent gripper-based grasp are counted as one trial. A failed reset, failed subsequent grasp, or departure from the workspace before grasp completion is counted as a failed trial. PSR is computed over successful target grasps and is defined as the proportion whose grasp center coincides with the object center. This separates grasp precision from general grasp success and indicates whether the grasp is geometrically favorable for subsequent handling and placement. For a trial that uses active state regulation, PSR is evaluated on the subsequent gripper-based grasp after renewed perception and replanning; the relocation action is not counted as a final grasp. We have clarified this evaluation sequence in \textit{Section~V-D on page~10}, with the revisions highlighted in red.
 
 \question{6}{The parameter settings and tuning strategy are insufficiently specified.
 Several important thresholds and weights in PX3C, CAOS, the Kalman filter, and the motion planner are not explicitly reported. The authors should provide the main parameter values and briefly explain how they were selected or tuned.}
@@ -131,37 +135,40 @@ Thank you for your suggestion. The manuscript's parameter table is reproduced wi
 
 PX3C used a 0.005~m voxel size, a 0.005~m RANSAC distance threshold, 500 hypotheses per frame, and a 5\% candidate-OBB trim fraction. Neighborhood filtering used a 0.03~m radius and at least three neighbors, with $\epsilon_{\mathrm{prot}}=0.005$~m. CAOS used a 0.15~m clustering tolerance and a minimum cluster size of 500, with $\tau_{\mathrm{in}}=0.010$~m, $(w_p,w_r,w_s)=(2.0,1.06,0.38)$, and $\eta=1.0$.
 
-The DKF update interval was $\Delta T=0.20$~s. Planning used $\Delta h=0.080$~m, $\bar v=1.0$~m/s, a Newton--Raphson tolerance of $10^{-3}$~s, a safety factor $\alpha=1.2$, and synchronization references $v_{\mathrm{ref}}=0.4932$~m/s and $d_{\mathrm{ref}}=0.020$~m. The velocity and acceleration limits $v_{\mathrm{max}}$ and $a_{\mathrm{max}}$ are robot-controller inputs.
+The DKF update interval was $\Delta T=0.20$~s. Planning used $\Delta h=0.080$~m, $\bar v=1.0$~m/s, $\Delta t_{\mathrm{buffer}}=0.20$~s, and a Newton--Raphson tolerance of $10^{-3}$~s, with synchronization references $v_{\mathrm{ref}}=0.4932$~m/s and $d_{\mathrm{ref}}=0.020$~m. The velocity and acceleration limits $v_{\mathrm{max}}$ and $a_{\mathrm{max}}$ are robot-controller inputs.
 
 Process noise was adjusted through preliminary tracking experiments, measurement noise was estimated from static RGB-D measurements, and the remaining planning and regulation settings were selected through preliminary experiments. Geometric settings follow experiment records or fixed implementation choices. Loss weights were selected by grid search with reference to the official YOLO settings. All settings were kept fixed during evaluation. These settings and their selection are described in \textit{Sections~V-A and V-B on pages~8--9}, with the revisions highlighted in red.
 
 \begin{table}[!t]
-\color{red}
 \centering
-\caption{Core parameters of Geometric Modeling, Motion Planning, and Active State Regulation.}
+\caption{Core parameters List.}
 \label{tab:response_parameters}
-\footnotesize
-\setlength{\tabcolsep}{5pt}
-\renewcommand{\arraystretch}{1.08}
-\begin{tabular}{@{}lc@{}}
+\scriptsize
+\setlength{\tabcolsep}{1.5pt}
+\renewcommand{\arraystretch}{1.0}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.40\columnwidth}>{\raggedright\arraybackslash}p{0.55\columnwidth}@{}}
 \toprule
 Parameter & Value \\
 \midrule
 \multicolumn{2}{@{}l}{\textit{PX3C}} \\
-$\tau_{\mathrm{thin}}$ & $2.0$ \\
-$\tau_{\mathrm{prot}}$ & $0.2$ \\
-$\tau_{\mathrm{norm}}$ & $0.065$ \\
+$\text{Voxel / RANSAC / radius}$ & \shortstack[l]{$0.005~\mathrm{m}/0.005~\mathrm{m}/0.03~\mathrm{m}$} \\
+$\text{hypotheses / Trim / neighbors}$ & \shortstack[l]{$500/0.05/3$} \\
+$\epsilon_{\mathrm{prot}}$ & $0.005~\mathrm{m}$ \\
+$\tau_{\mathrm{thin}},\tau_{\mathrm{prot}},\tau_{\mathrm{norm}}$ & $2.0,\ 0.2,\ 0.065$ \\
 \midrule
 \multicolumn{2}{@{}l}{\textit{CAOS}} \\
-$\alpha_1,\alpha_2,\alpha_3$ & $0.43,\ 0.21,\ 0.36$ \\
-$q_{\min}$ & $0.65$ \\
-$\beta_{\max},k$ & $0.70,\ 2$ \\
+$\text{Cluster tolerance}$ & $0.15~\mathrm{m}$ \\
+$\text{Minimum points}$ & $500$ \\
+$\tau_{\mathrm{in}}$ & $0.010~\mathrm{m}$ \\
+$(w_p,w_r,w_s),\eta$ & $(2.0,1.06,0.38),\ 1.0$ \\
+$(\alpha_1,\alpha_2,\alpha_3),q_{\min},(\beta_{\max},k)$ & $(0.43,0.21,0.36),\ 0.65,\ (0.70,2)$ \\
 \midrule
 \multicolumn{2}{@{}l}{\textit{DKF, Motion Planning, and Active State Regulation}} \\
 $\boldsymbol{Q}$ & $\mathrm{diag}([10^{-5},10^{-4},10^{-3}]_{\times3})$ \\
-$\boldsymbol{R}$ & $\mathrm{diag}(2.5\!\times\!10^{-5},2.5\!\times\!10^{-5},10^{-4})~\mathrm{m}^2$ \\
-$\lambda,\epsilon_{\mathrm{safe}}$ & $0.01,\ 0.01$ \\
-$\tau_P$ & $4.0\times10^{-4}~\mathrm{m}^2$ \\
+$\boldsymbol{R}$ & $\mathrm{diag}([2.5\!\times\!10^{-5},\,2.5\!\times\!10^{-5},10^{-4}])~\mathrm{m}^2$ \\
+$\Delta T,\Delta h,\bar v,\Delta t_{\mathrm{buffer}}$ & $0.20~\mathrm{s},\ 0.080~\mathrm{m},\ 1.0~\mathrm{m/s},\ 0.20~\mathrm{s}$ \\
+$\text{NR tolerance},v_{\mathrm{ref}},d_{\mathrm{ref}}$ & $10^{-3}~\mathrm{s},\ 0.4932~\mathrm{m/s},\ 0.020~\mathrm{m}$ \\
+$\lambda,\epsilon_{\mathrm{safe}},\tau_P$ & $0.01,\ 0.01,\ 4.0\times10^{-4}~\mathrm{m}^2$ \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -192,13 +199,11 @@ where $\Delta T=0.20$~s is the state-update interval. For the state ordering $\b
 0&0&0&0&0&0&1&0&0
 \end{bmatrix}.
 \]
-It extracts the centroid position, $\boldsymbol{H}\boldsymbol{x}_k=[p_x,p_y,p_z]^T$, for comparison with the observed RGB-D centroid during the filter update. Velocity and acceleration are inferred through the transition model and recursive updates. We have also standardized the prior and posterior estimates as $\hat{\boldsymbol{x}}_k^{-}$ and $\hat{\boldsymbol{x}}_k$, with covariances $\boldsymbol{P}_k^{-}$ and $\boldsymbol{P}_k$. The notation and observation-matrix descriptions are clarified in \textit{Section~IV-C1 on page~7}. The CAOS definitions and algorithm inputs are clarified in \textit{Section~IV-B2 on page~6} and \textit{Algorithm~3 on page~8}. These revisions are highlighted in red in the manuscript.
+It extracts the centroid position, $\boldsymbol{H}\boldsymbol{x}_k=[p_x,p_y,p_z]^T$, for comparison with the observed RGB-D centroid during the filter update. Velocity and acceleration are inferred through the transition model and recursive updates. We have also standardized the prior and posterior estimates as $\hat{\boldsymbol{x}}_k^{-}$ and $\hat{\boldsymbol{x}}_k$, with covariances $\boldsymbol{P}_k^{-}$ and $\boldsymbol{P}_k$. The notation and observation-matrix descriptions are clarified in \textit{Section~IV-D1 on page~7}. The CAOS definitions and algorithm inputs are clarified in \textit{Section~IV-C2 on page~6} and \textit{Algorithm~2 on page~7}. These revisions are highlighted in red in the manuscript.
 
 \reviewer{Reviewer: 2}
 
-Comments to the Authors
-
-Please comment on Major Contribution of the Paper, Organization and Style, Technical Accuracy, Presentation and Adequacy of Citations (List possible additions if needed).
+\reviewercomments
 This paper presents a vision-driven closed-loop framework for high-precision robotic baggage handling on a moving conveyor. It integrates enhanced instance segmentation, pixel-to-3D filtering, temporally stabilized OBB estimation, predictive planning, and active state regulation. The real-platform experiments are practically relevant and demonstrate a clear improvement in precision success rate. Overall, the manuscript is technically sound, clearly presented. Please see my comments below for my concerns.
 
 \question{1}{The proposed framework is described clearly and contains several well-integrated components. To make the implementation easier to follow and reproduce, it would be helpful to provide the values of a few key parameters that are not currently specified, such as the loss weights in (4), the main PX3C and CAOS thresholds, and the principal DKF and planning settings. These values may be added briefly in the corresponding sections or in supplementary material.}
@@ -214,7 +219,7 @@ Thank you for your suggestion. The training and test splits were grouped by bagg
 \question{3}{Table III clearly illustrates the progressive benefit of the proposed modules at the system level. For completeness, the authors may briefly clarify whether all configurations followed the same scenario distribution and how the 500 trials were allocated among the rows. This small addition would help readers interpret the comparison more easily.}
 
 \answer
-Thank you for your suggestion. Each of the five configurations underwent 500 trials, giving 2500 trials in total. Every configuration included 470 suitcase, 25 backpack, and 5 irregular-object trials. All configurations used the same scenario distribution of 83\% single-item placement, 10\% two-item contact, 2\% three-item stacking, and 5\% sidewall occlusion. We have clarified this allocation in the text and table caption. The revisions are highlighted in red in \textit{Section~V-D and Table~IV on page~10}.
+Thank you for your suggestion. Each of the five configurations underwent 500 trials, giving 2500 trials in total. Every configuration included 470 suitcase, 25 backpack, and 5 irregular-object trials, with the allocation determined by the number of physical test objects available in each category. All configurations used the same scenario distribution of 83\% single-item placement, 10\% two-item contact, 2\% three-item stacking, and 5\% sidewall occlusion. We have clarified this allocation in the text and table caption. The revisions are highlighted in red in \textit{Section~V-D and Table~IV on page~10}.
 
 \question{4}{The figures and algorithms are generally informative and make the overall workflow easy to understand. Please correct the minor typo “Dynamic Grasping Strateg” in the caption of Fig. 3. In addition, the Acknowledgments section still contains template placeholder text and should be replaced with the final acknowledgment or removed if it is not applicable.}
 
@@ -224,38 +229,55 @@ Thank you for your careful proofreading. We have corrected ``Dynamic Grasping St
 \question{5}{The manuscript is generally well written. A final light proofreading would further improve its presentation. For example, please standardize the spacing between numerical values and units (e.g., “0.5 m/s,” “2 cm,” and “80 mm”) and verify whether “Close gripper” in Algorithm 3 accurately describes the suction-based execution discussed in the text.}
 
 \answer
-Thank you for your suggestion. We have standardized the spacing between values and units, including 0.5~m/s, 2~cm, and 80~mm. ``Close gripper'' in \textit{Algorithm~3} describes normal dynamic grasping, while suction is used for relocation during active state regulation. We have clarified these roles in the manuscript. The formatting corrections are highlighted in red on \textit{pages~1, 4, and~8}, and the end-effector clarifications are highlighted in red in the \textit{Introduction on page~2} and \textit{Section~IV-C3 on page~8}.
+Thank you for your suggestion. We have standardized the spacing between values and units, including 0.5~m/s, 2~cm, and 80~mm. ``Close gripper'' in \textit{Algorithm~3} describes normal dynamic grasping, while suction is used for relocation during active state regulation. We have clarified these roles in the manuscript. The formatting corrections are highlighted in red on \textit{pages~1, 4, and~8}, and the end-effector clarifications are highlighted in red in the \textit{Introduction on page~2} and \textit{Section~IV-D3 on page~8}.
 
 \reviewer{Reviewer: 3}
 
-Comments to the Authors
-
-Please comment on Major Contribution of the Paper, Organization and Style, Technical Accuracy, Presentation and Adequacy of Citations (List possible additions if needed).
+\reviewercomments
 The manuscript presents a practical and well-integrated framework for high-precision robotic baggage handling, with convincing validation on a real robotic platform. I believe the manuscript can be considered for publication after revision.
 
 \question{1}{The authors are encouraged to better distinguish the methodological novelty of the proposed modules from the novelty arising from their integration into a complete closed-loop baggage-handling system.}
 
 \answer
-Thank you for your suggestion. Our module contributions comprise the feature aggregation and mask refinement in MSAM-Net, conditional geometric filtering in PX3C, and quality-aware temporal stabilization in CAOS. These modules build on YOLOv10, PCL processing, and PCA-based OBB estimation. Our system contribution is their integration with standard Kalman filtering, two-stage planning, and active state regulation for dynamic baggage handling. We have clarified this distinction in the \textit{Introduction}. The revised descriptions are highlighted in red on \textit{page~2}.
+Thank you for your suggestion. Following the three contributions in the revised \textit{Introduction}, we distinguish the methodological advances from their established foundations as follows:
+\begin{enumerate}
+\renewcommand{\labelenumi}{\arabic{enumi}.}
+\item \textbf{Instance segmentation.} Built on a YOLOv10 backbone, MSAM-Net introduces four-level multi-branch feature aggregation and attention-guided multi-scale mask refinement to improve segmentation accuracy under tag and strap interference while maintaining real-time inference.
+\item \textbf{Spatio-temporal geometric modeling.} Built on standard PCL processing and PCA-based OBB estimation, PX3C introduces pixel-to-3D geometric consistency filtering to suppress residual flexible attachments and improve geometric accuracy. Building on framewise OBB estimates, CAOS introduces quality-aware temporal smoothing to stabilize pose and scale estimates under conveyor motion and sensing noise.
+\item \textbf{Closed-loop dynamic grasping.} Using standard discrete Kalman filtering for recursive Bayesian state estimation, the strategy combines two-stage relative-velocity planning for rapid interception and precise synchronization with active state regulation triggered by high estimated uncertainty or synchronization failure. Suction-assisted relocation supports closed-loop execution recovery, enabling renewed state estimation and grasp replanning.
+\end{enumerate}
+At the system level, these advances form an interpretable, robust dynamic grasping framework that supports replanning: explicit masks, geometric states, and motion estimates allow errors to be inspected, while active state regulation closes the loop through renewed perception and planning. The complete system is validated on a real robotic baggage-handling platform. The revised contribution statements and their technical foundations are highlighted in red in the \textit{Introduction on page~2}.
 
 \question{2}{The related-work section could be made more comprehensive, particularly with respect to recent work on dynamic robotic grasping, active perception/rearrangement, and real-time perception-to-action systems.}
 
 \answer
-Thank you for your suggestion. We have expanded the discussion of dynamic grasping with adaptive conveyor grasping, VFAS-Grasp, and Grasp-MPC. We have also added DextrAH-G and real-time action chunking, together with recent work on joint pushing and grasping, confined-workspace rearrangement, and active viewpoint selection. The revised discussion explains how these approaches relate to our geometric refinement and suction-assisted state regulation. The additions are highlighted in red in \textit{Sections~II-C and II-D on pages~3--4}, with the added references highlighted in red on \textit{page~12}.
+Thank you for your suggestion. We have restructured the entire \textit{Related Work} section around the system modules into four subsections: \textit{II-A, Object Detection and Instance Segmentation; II-B, Geometric Modeling; II-C, Dynamic Grasping; and II-D, Active State Regulation}. Dynamic grasping and perception-to-action systems are discussed in \textit{Section~II-C}, while active perception and rearrangement are discussed in \textit{Section~II-D}.
+
+\textit{Section~II-C} progresses from image-based and position-based visual servoing to state estimation and explicit interception planning, hybrid methods such as VFAS-Grasp and Grasp-MPC, and recent end-to-end perception-to-action systems, including DextrAH-G, RT-2, the Physical Intelligence $\pi$ series, and OpenVLA. We also discuss real-time action chunking. The revised analysis explains that image-plane regulation alone does not directly enforce metric placement accuracy, while pose-based control depends on reliable geometric estimates. Generalist end-to-end policies also face model-size and inference-latency constraints. Our application additionally requires accurate baggage dimensions and poses, explicit motion constraints, geometric error inspection, and structured replanning during recovery, motivating the explicit perception-and-planning framework.
+
+\textit{Section~II-D} discusses rearrangement as active state regulation that improves both observability and grasp accessibility. We review cluttered-scene pushing and grasping by Wang et al. and Hu et al., confined-workspace rearrangement by Lee and Kim, interactive failure prediction, and active viewpoint selection with GraspView. However, pushing and multistep rearrangement can add disturbances and delay when large baggage moves through a narrow conveyor workspace, while viewpoint selection differs from our fixed-camera setting. We therefore use suction-assisted relocation when estimated uncertainty is high or synchronization fails, as a low-complexity state reset for closed-loop execution, followed by renewed perception, state estimation, and replanning. These revisions are highlighted in red in \textit{Sections~II-C and II-D on pages~3--4}, with the added references highlighted in red on \textit{page~12}.
 
 \question{3}{Please expand the discussion of limitations. For example, the current evaluation is dominated by suitcase-type baggage and relatively structured conveyor settings. The generalizability to more deformable baggage, more severe clutter, different conveyor conditions, and other airport environments should be discussed.}
 
 \answer
-Thank you for your suggestion. Our evaluation primarily covers rigid baggage on a structured conveyor at a nearly fixed speed. Performance with deformable baggage, severe clutter, variable conveyor motion, and different airport layouts remains to be established. We have stated these limitations and identified tactile sensing and coordinated packing planning as future directions. The additions are highlighted in red in \textit{Section~VI on page~11}.
+Thank you for your suggestion. The revised limitations discussion states that the current validation primarily covers rigid baggage on a structured conveyor at a nearly fixed speed. Generalization to deformable baggage, severe clutter, variable conveyor motion, and different airport layouts remains to be established. The current work also does not explicitly optimize packing policies. Future work will integrate tactile sensing to improve contact feedback and deformable-baggage handling, and investigate packing planning that coordinates container layouts with grasping and placement to improve packing density in practical aircraft baggage loading. These limitations, the scope of the current work, and the future directions are discussed in \textit{Section~VI on page~11}, with the additions highlighted in red.
 
 \question{4}{The authors are encouraged to further discuss the practical significance of the large improvement in Precision Success Rate compared with the relatively modest improvement in General Success Rate. This would help readers better understand why precise pose estimation and placement reliability are particularly important for real airport baggage-handling applications.}
 
 \answer
-Thank you for your suggestion. GSR improves by 2.8 percentage points, while PSR improves by 30.6 percentage points. The baseline already lifts most objects successfully, but precise placement is needed to maintain planned positions, orientations, and clearances for dense loading. We have expanded this practical interpretation and clarified that PSR is measured among successful suitcase grasps. We also state that packing policies are outside the current evaluation. The revisions are highlighted in red in \textit{Section~V-D on page~10} and \textit{Section~VI on page~11}.
+Thank you for your suggestion. GSR improves by 2.8 percentage points, while PSR improves by 30.6 percentage points. Under the revised definition, PSR is the proportion of successful target grasps whose grasp center coincides with the object center. This center-grasping criterion indicates whether baggage is captured at a geometrically favorable location for subsequent handling and placement. The baseline already lifts most objects successfully, but precise center-grasping is needed to maintain planned positions, orientations, and clearances for dense loading. In airport operations, baggage must be packed tightly in transport containers according to planned positions and orientations. Successful lifting therefore completes only the first stage of the grasp-and-place task. The PSR gain demonstrates the contribution of accurate geometric perception to controlled, precise placement, providing a foundation for subsequent high-density loading. In particular, off-center grasps can increase placement errors, while gaps of only a few centimeters can reduce space utilization or destabilize a stack.
+
+Future work will integrate packing planning with grasping and placement to develop a complete grasping-and-packing workflow for practical deployment and evaluation. Packing-policy optimization remains outside the current evaluation, and PSR is measured among successful target grasps. We have expanded the explanation of center-grasping and its relevance to airport loading in \textit{Section~V-D on page~10}, and clarified the current scope and future coordinated packing planning in \textit{Section~VI on page~11}. The revisions are highlighted in red.
 
 \question{5}{Please strengthen the discussion of the overall closed-loop design. In particular, it would be useful to explain more clearly how the interaction between perception, geometric modeling, prediction, and active state regulation contributes to robustness compared with conventional weakly coupled perception-and-control pipelines.}
 
 \answer
-Thank you for your suggestion. MSAM-Net provides instance masks, PX3C removes residual geometric outliers, and CAOS stabilizes the OBB estimates used for prediction and planning. Excessive position uncertainty or failed synchronization triggers suction-assisted relocation, followed by new observations, state re-estimation, and grasp replanning. This feedback allows the system to improve observability before attempting normal grasping. We have clarified these interactions, with the revisions highlighted in red in the \textit{Abstract on page~1}, \textit{Sections~II-D and III-A on page~4}, the \textit{caption of Fig.~1 on page~5}, and \textit{Section~IV-C3 on page~8}.
+Thank you for your suggestion. Our hierarchical design combines geometric refinement with feedback-driven recovery. MSAM-Net supplies instance masks, PX3C suppresses residual 3D outliers, and CAOS stabilizes the OBB estimates used for state prediction and planning. When positional covariance exceeds the threshold or synchronization fails to converge, suction-assisted relocation is followed by renewed perception, state estimation, and grasp replanning. This physical feedback closes the loop within our framework and recovers execution states that a weakly coupled pipeline might otherwise pass through to the robot.
+
+We also discuss the architectural trade-off with end-to-end perception-to-action policies. Such policies offer semantic reasoning and cross-task generalization, whereas our explicit geometric states support error inspection, motion constraints, and structured replanning for precision placement. This motivates the modular design under embedded real-time constraints; modularity alone does not establish robustness, which also depends on the feedback mechanisms above.
+
+The system ablation provides complementary evidence. With 500 trials per configuration and the same scenario distribution, adding PX3C+CAOS increases PSR from 69.6\% to 83.8\%. Adding active state regulation to the perception--modeling--planning system further increases PSR from 84.9\% to 92.7\%, while GSR remains 96.4\%. These results support the roles of geometric refinement and active feedback in placement reliability, rather than constituting a direct performance comparison with end-to-end policies.
+
+The architectural comparison is discussed in \textit{Section~II-C on page~3}; module interaction and feedback recovery are explained in \textit{Sections~II-D and III-A on page~4}, \textit{Fig.~1 on page~5}, and \textit{Section~IV-D3 on page~8}. Experimental support is provided in \textit{Section~V-C and Fig.~6 on page~10}, \textit{Fig.~8 on page~11}, and \textit{Section~V-D and Table~IV on page~10}. The corresponding manuscript revisions are highlighted in red.
 
 \end{document}

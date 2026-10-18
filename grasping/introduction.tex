@@ -11,7 +11,8 @@ To address the above issues, this paper proposes a vision-driven closed-loop per
 
 The contributions of this paper are summarized as follows.
 \begin{itemize}
-  \item A real-time \revadd{instance segmentation network}, MSAM-Net, is proposed for baggage instance segmentation under severe visual interference. The network combines four-level multi-branch feature aggregation with attention-guided multi-scale mask refinement.
-  \item A spatio-temporal geometric modeling framework is introduced. PX3C removes residual 3D interference by enforcing pixel-to-3D geometric consistency, and CAOS stabilizes OBB pose and scale estimates using quality-aware temporal smoothing.
-  \item A closed-loop dynamic grasping strategy is developed by integrating recursive Bayesian state estimation, two-stage relative-velocity planning, and active state regulation. The complete system is validated on a real robotic baggage-handling platform.
+  \item A real-time \revadd{instance segmentation network}, MSAM-Net, is proposed for baggage instance segmentation under severe visual interference. \revadd{Built on YOLOv10, it introduces four-level multi-branch feature aggregation and attention-guided mask refinement to improve boundary quality and suppress tag and strap interference.}
+  \item \revadd{A spatio-temporal geometric modeling framework is proposed. Built on PCL/PCA-based OBB initialization, it introduces PX3C for pixel-to-3D cross-consistency filtering and CAOS for quality-aware temporal stabilization, improving 3D reliability.}
+  \item \revadd{A closed-loop dynamic grasping strategy is proposed for moving baggage. It combines discrete Kalman-filter state estimation, two-stage relative-velocity planning, and uncertainty-triggered suction-assisted regulation to support recovery attempts when the estimated uncertainty is high or synchronization fails.}
+  \item \revadd{A robust dynamic grasping method is proposed by integrating the perception, geometric modeling, estimation, planning, and regulation modules, and is extensively validated on a real robotic baggage-handling platform.}
 \end{itemize}

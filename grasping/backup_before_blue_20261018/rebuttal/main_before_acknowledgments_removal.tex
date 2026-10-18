@@ -1,0 +1,115 @@
+\documentclass[lettersize,journal]{IEEEtran}
+\usepackage{amsmath,amsfonts}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
+\usepackage{textcomp}
+\usepackage{stfloats}
+\usepackage{url}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{cite}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[normalem]{ulem}
+\DeclareRobustCommand{\reviewnote}[1]{{\normalfont\footnotesize\hyphenpenalty=10000\exhyphenpenalty=10000\color{blue}(#1)}}
+\DeclareRobustCommand{\revadd}[1]{{\color{red}#1}}
+\DeclareRobustCommand{\revdel}[1]{{\color{red}\sout{#1}}}
+\newcommand{\revdelmath}[1]{\begingroup\color{red}%
+  \setbox0=\hbox{$\displaystyle#1$}%
+  \rlap{\raisebox{0.45ex}{\rule{\wd0}{0.45pt}}}\box0\endgroup}
+\newcommand{\revaddmath}[1]{{\color{red}#1}}
+\makeatletter
+\newcommand{\revisionbibcolor}[1]{\normalcolor
+  \ifcsname addedbib@#1\endcsname\color{red}\fi}
+\let\revision@bibitem\@bibitem
+\def\@bibitem#1{\revisionbibcolor{#1}\revision@bibitem{#1}%
+  \ifcsname addedbib@#1\endcsname\reviewnote{\mbox{Reviewer 3, Q2}}\ \fi}
+\let\revision@lbibitem\@lbibitem
+\def\@lbibitem[#1]#2{\revisionbibcolor{#2}\revision@lbibitem[#1]{#2}%
+  \ifcsname addedbib@#2\endcsname\reviewnote{\mbox{Reviewer 3, Q2}}\ \fi}
+\expandafter\def\csname addedbib@chen2025adaptive\endcsname{}
+\expandafter\def\csname addedbib@wang2025graspview\endcsname{}
+\expandafter\def\csname addedbib@black2025realtime\endcsname{}
+\makeatother
+\algrenewcommand{\algorithmiccomment}[1]{\hfill$\triangleright$ #1}
+\algrenewcommand\algorithmicrequire{\textbf{Input:}}
+\algrenewcommand\algorithmicensure{\textbf{Output:}}
+\hyphenation{op-tical net-works semi-conduc-tor IEEE-Xplore}
+% updated with editorial comments 8/9/2021
+
+\begin{document}
+
+\title{A Vision-Driven Closed-Loop Framework  \\ for High-Precision Robotic Baggage Handling}
+
+
+
+% The paper headers
+\markboth{Journal of \LaTeX\ Class Files,~Vol.~14, No.~8, August~2021}%
+{Shell \MakeLowercase{\textit{et al.}}: A Sample Article Using IEEEtran.cls for IEEE Journals}
+
+
+% Remember, if you use this you must call \IEEEpubidadjcol in the second
+% column for its text to clear the IEEEpubid mark.
+
+\maketitle
+
+\begin{abstract}
+Robotic baggage handling in airport logistics requires not only reliable grasp execution but also accurate geometric alignment under high-throughput industrial constraints. Existing vision-based manipulation pipelines usually process perception, geometric modeling, and motion control as weakly coupled modules. As a result, their performance can degrade when baggage tags and straps introduce visual interference, when residual mask errors are amplified during 2D to 3D projection, or when conveyor motion causes temporally unstable observations. This paper presents a closed-loop perception--geometric modeling--control framework for dynamic robotic baggage handling. The proposed system improves 2D instance segmentation through multi-scale feature aggregation and attention-guided mask refinement, enhances 3D geometric reliability using pixel-to-3D cross-consistency filtering and temporal oriented bounding-box (OBB) stabilization, and performs predictive grasp execution through recursive state estimation, coarse-to-fine interception planning, and active state regulation. \revadd{By coupling instance segmentation and spatio-temporal geometric modeling for accurate baggage perception, motion planning for grasp trajectory generation, and hybrid suction--gripper operation for active state regulation under low-confidence conditions, the framework achieves robust dynamic grasping.} \reviewnote{\mbox{Reviewer 1, Q2}; \mbox{Reviewer 1, Q3}; \mbox{Reviewer 3, Q5}} Experiments on a real robotic platform show that the general grasp success rate remains consistently high, increasing from 93.6\% to 96.4\%, while the precision success rate improves from 62.1\% to 92.7\%. These results indicate that the proposed framework primarily improves pose accuracy and placement reliability rather than merely increasing lift success, \revadd{supporting precision-oriented baggage handling for downstream loading.} \reviewnote{\mbox{Reviewer 3, Q3}; \mbox{Reviewer 3, Q4}}
+\end{abstract}
+
+\renewcommand{\abstractname}{Note to Practitioners}
+\begin{abstract}
+This paper addresses the practical challenges of automating baggage handling in high-speed airport logistics. While industrial robotic arms are highly capable, they struggle to reliably grasp and densely pack baggage from moving conveyor belts. Baggage often features flexible, distracting attachments, such as identification tags and loose straps, which traditional vision systems mistakenly treat as solid grasping points. Furthermore, the conveyor's continuous motion causes tracking errors, leading to failed lifts or inaccurate placements.  To solve these issues, we introduce a tightly integrated framework connecting the robot's perception directly to its motion controls. First, tailored image processing accurately outlines the rigid baggage body while explicitly ignoring flexible tags. Second, the system builds a reliable 3D model by filtering depth-sensor noise and smoothing visual jitters. Finally, it predicts the moving baggage's future path, enabling the robotic arm to synchronize its speed and seamlessly intercept the target. If baggage is stacked in a confusing way, the robot actively rearranges items to improve visibility.  In real-world tests, this approach improved the precision of placement from 62.1\% to 92.7\%. This demonstrates that the framework achieves the high-accuracy positioning required to tightly pack baggage into containers. 
+\end{abstract}
+
+\begin{IEEEkeywords}
+Robotic Baggage Handling, Industrial Robotics, Predictive Motion Planning, 3D Pose Estimation.
+\end{IEEEkeywords}
+
+\input{introduction}
+\input{related}
+\input{problem}
+\input{method}
+\input{experiment}
+\input{conclusion}
+
+
+
+\section*{\revdel{Acknowledgments}}
+\noindent\reviewnote{\mbox{Reviewer 1, Q4}; \mbox{Reviewer 2, Q4}}\par
+\revdel{This should be a simple paragraph before the References to thank those individuals and institutions who have supported your work on this article.} \reviewnote{\mbox{Reviewer 1, Q4}; \mbox{Reviewer 2, Q4}}
+
+
+
+
+
+
+
+%{\appendices
+%\section*{Proof of the First Zonklar Equation}
+%Appendix one text goes here.
+% You can choose not to have a title for an appendix if you want by leaving the argument blank
+%\section*{Proof of the Second Zonklar Equation}
+%Appendix two text goes here.}
+
+
+
+\bibliography{reference}
+
+
+
+\bibliographystyle{IEEEtran}
+
+
+
+
+
+
+
+
+\end{document}
+
+
